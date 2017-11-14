@@ -4,9 +4,11 @@
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
   <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/css/semantic.min.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/css/sweetalert.css}">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css"/>
 
   <script th:src="@{/js/semantic.js}"></script>
   <meta name="viewport"
@@ -41,6 +43,10 @@
         <a class="item" th:href="@{/admin/foods}">
           <i class="food large icon"></i>
           <i th:text="#{common.foods}"></i>
+        </a>
+        <a class="item" th:href="@{/timeline}">
+          <i class="calendar large icon"></i>
+          <i th:text="#{common.timeline}"></i>
         </a>
         <a class="item" th:href="@{/users}">
           <i class="users large icon"></i>

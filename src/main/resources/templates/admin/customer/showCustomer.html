@@ -17,8 +17,8 @@
     <tr>
       <td th:text="${customer.fullName}"></td>
       <td><a th:href="@{'/admin/rooms/' + ${customer.room.id}}" th:text="${customer.room.code}"/></td>
-      <td th:text="${customer.arrivalDate}"></td>
-      <td th:text="${customer.returnDate}"></td>
+      <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
+      <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>
     </tr>
     </tbody>
   </table>
@@ -36,7 +36,7 @@
     <tbody>
     <tr th:each="addition :${customer.additions}">
       <td><a th:href="@{'/admin/additions/' + ${addition.id}}" th:text="${addition.id}"/></td>
-      <td th:text="${addition.date}"></td>
+      <td th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"></td>
       <td th:text="${addition.price}"></td>
     </tr>
     </tbody>

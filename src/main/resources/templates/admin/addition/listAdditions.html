@@ -26,7 +26,7 @@
       <tbody>
       <tr th:each="addition :${additions}">
         <td><a th:href="@{'/admin/additions/' + ${addition.id}}" th:text="${addition.id}"/></td>
-        <td th:text="${addition.date}"></td>
+        <td th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"></td>
         <td th:text="${addition.customer.fullName}"></td>
         <td th:text="${addition.price}"></td>
       </tr>

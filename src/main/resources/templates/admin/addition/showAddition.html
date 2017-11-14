@@ -16,7 +16,7 @@
     <tr>
       <td th:text="${addition.id}"></td>
       <td><a th:href="@{'/admin/customers/' + ${addition.customer.id}}" th:text="${addition.customer.fullName}"/></td>
-      <td th:text="${addition.date}"></td>
+      <td th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"></td>
     </tr>
     </tbody>
   </table>

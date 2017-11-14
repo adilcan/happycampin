@@ -1,5 +1,6 @@
 package in.happycamp.management.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -34,6 +35,7 @@ public class Customer extends BaseEntity {
 	@OneToOne
 	private Bill bill;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Addition> additions;
 }

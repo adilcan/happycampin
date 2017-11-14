@@ -1,0 +1,72 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
+>
+<th:block layout:fragment="content">
+
+  <div class="row">
+
+    <div class="column">
+
+      <div class="ui raised container segment">
+        <h3 th:text="#{common.timeline}" class="ui center aligned blue header">Timeline</h3>
+        <div id="visualization"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+  .vis-item {
+    border-color: LightSlateGray;
+    background-color: LightSlateGray;
+    color: white;
+  }
+</style>
+
+
+  <script th:inline="javascript">
+    var rooms = [[${rooms}]];
+    var customers = [[${customers}]];
+
+    var groups = new vis.DataSet();
+
+    for (var g = 0; g < rooms.length; g++) {
+    	groups.add({
+    	  id: rooms[g].id,
+    	  content: rooms[g].code});
+    }
+
+    var items = new vis.DataSet();
+
+    for(var i = 0; i< customers.length; i++){
+      items.add({
+        id: customers[i].id,
+        group: customers[i].room.id,
+        content: customers[i].fullName,
+        start: customers[i].arrivalDate.substring(0,10),
+        end: customers[i].returnDate.substring(0,10)
+      });
+    }
+
+    var container = document.getElementById('visualization');
+    var options = {
+      stack: true,
+      horizontalScroll: true,
+      zoomKey: 'ctrlKey',
+      maxHeight: 400,
+      start: new Date(),
+      end: new Date(1000*60*60*24*12 + (new Date()).valueOf()),
+    margin: {
+      item: 10, // minimal margin between items
+      axis: 5   // minimal margin between items and the axis
+    },
+    orientation: 'top'
+  };
+
+  var timeline = new vis.Timeline(container);
+  timeline.setOptions(options);
+  timeline.setGroups(groups);
+  timeline.setItems(items);
+  </script>
+
+</th:block>
+</html>

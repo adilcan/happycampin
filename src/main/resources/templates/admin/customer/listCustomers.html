@@ -27,8 +27,8 @@
       <tr th:each="customer :${customers}">
         <td><a th:href="@{'/admin/customers/' + ${customer.id}}" th:text="${customer.fullName}"/></td>
         <td th:text="${customer.room.code}"></td>
-        <td th:text="${customer.arrivalDate}"></td>
-        <td th:text="${customer.returnDate}"></td>
+        <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
+        <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>
       </tr>
       </tbody>
       <tfoot></tfoot>

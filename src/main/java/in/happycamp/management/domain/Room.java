@@ -1,5 +1,6 @@
 package in.happycamp.management.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Room extends BaseEntity {
 
 	private boolean isCleaned;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "room", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Customer> customers;
 
