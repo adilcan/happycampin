@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<th:block layout:fragment="content">
+
+  <div class="row">
+    <h1 th:text="#{addition.update}">Update an Addition</h1>
+    <div class="ui container">
+      <form class="ui addition form" method="post" th:action="@{@{'/admin/additions/' + ${addition.id} + '/update'}}" th:object="${addition}">
+
+        <div class="field">
+          <label th:text="#{common.customer}">Customer</label>
+          <select class="ui fluid dropdown" th:field="*{customer}">
+            <option th:text="#{common.customer}" value="">Customer</option>
+            <option th:each="customer :${customers}"
+                    th:value="${customer.id}"
+                    th:text="${customer.fullName}"></option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label th:text="#{common.foods}" for="foods">Foods</label>
+          <th:block id="foods" th:each="food : ${foods}" th:field="*{foods}">
+            <td><input type="checkbox" th:value="${food.name}"/></td>
+          </th:block>
+        </div>
+
+        <div class="field">
+          <label th:text="#{common.date}" for="date">Date</label>
+          <input type="date" id="date" th:placeholder="#{common.date}" th:value="*{date}" th:field="*{date}"/>
+        </div>
+        <button th:text="#{common.update}" class="ui button" type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+
+</th:block>
+</html>

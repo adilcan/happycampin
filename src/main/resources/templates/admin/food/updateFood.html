@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
+>
+<th:block layout:fragment="content">
+  <div class="row">
+    <div class="ui secondary pointing fluid menu">
+      <h2 th:text="#{food.update}" class="ui header">Update Food</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="ui container">
+      <form class="ui food form" method="post" th:action="@{'/admin/foods/' + ${food.id} + '/update'}" th:object="${food}">
+
+        <div class="field">
+          <label th:text="#{food.name}" for="name">Food Name</label>
+          <input type="text" id="name" th:placeholder="#{food.name}" th:value="*{name}" th:field="*{name}"/>
+        </div>
+
+        <div class="ui right labeled input">
+          <label for="price" class="ui label">₺</label>
+          <input type="text" th:placeholder="#{food.price}" th:value="*{price}" th:field="*{price}" id="price">
+          <div class="ui basic label"></div>
+        </div>
+
+        <div class="field">
+          <label th:text="#{food.type}">Food Type</label>
+          <select class="ui fluid dropdown" th:field="*{foodType}">
+            <option th:each="foodType : ${T(in.happycamp.management.domain.FoodType).values()}"
+                    th:value="${foodType}"
+                    th:text="${foodType}"></option>
+          </select>
+        </div>
+
+        <button th:text="#{common.update}" class="ui button" type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+</th:block>
+</html>

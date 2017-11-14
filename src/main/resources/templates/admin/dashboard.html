@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
+>
+<th:block layout:fragment="content">
+  <div class="container">
+    <div class="ui center aligned segment">
+      <h1 th:text="#{common.welcome}">Welcome</h1>
+
+    <div class="ui two column centered grid">
+      <div class="row">
+        <div class="column">
+          <h3 th:text="#{chart.room_distro}" class="ui center aligned blue header">Chart</h3>
+          <canvas id="roomTypeChart" width="600" height="600"></canvas>
+        </div>
+        <div class="column">
+          <h3 th:text="#{chart.customer_capacity}" class="ui center aligned blue header">Chart</h3>
+          <canvas id="roomSizeChart" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <script th:inline="javascript">
+    var roomTypeData = [[${roomTypeData}]];
+    var customerSizeData = [[${customerSizeData}]];
+    var typeCtx = document.getElementById('roomTypeChart').getContext('2d');
+    var sizeCtx = document.getElementById('roomSizeChart').getContext('2d');
+
+
+    var typeChart = new Chart(typeCtx, {
+    type: 'doughnut',
+
+    data: {
+        labels: [ [[#{room.full_tents}]], [[#{room.available_tents}]], [[#{room.full_self_tents}]], [[#{room.available_self_tents}]], [[#{room.full_bungalows}]], [[#{room.available_bungalows}]] ],
+        datasets: [{
+            label: "Rooms",
+            backgroundColor: ['rgb(255, 25, 25)', 'rgb(255, 198, 198)', 'rgb(48, 174, 255)', 'rgb(183, 227, 255)', 'rgb(248, 252, 27)', 'rgb(254, 255, 206)'],
+            data: roomTypeData,
+        }]
+    },
+    options: {}
+    });
+
+    var typeChart = new Chart(sizeCtx, {
+    type: 'doughnut',
+
+    data: {
+        labels: [ [[#{customer.full}]], [[#{customer.empty}]] ],
+        datasets: [{
+            label: "Capacity",
+            backgroundColor: ['rgb(0, 0, 0)', 'rgb(237, 237, 237)'],
+            data: customerSizeData,
+        }]
+    },
+    options: {}
+    });
+
+
+
+
+
+
+
+
+  </script>
+
+</th:block>
+</html>

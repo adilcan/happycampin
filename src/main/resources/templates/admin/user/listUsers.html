@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<th:block layout:fragment="content">
+
+  <div class="four wide column">
+    <h1 th:text="#{common.users}">Users</h1>
+  </div>
+  <div class="ten wide column">
+    <a class="ui teal button" th:href="@{/users/new}">
+      <i class="add circle icon"></i>
+      <i th:text="#{user.new}"></i>
+    </a>
+  </div>
+
+  <div class="row">
+    <table class="ui celled table">
+      <thead>
+      <tr>
+        <th th:text="#{user.username}">Username</th>
+        <th th:text="#{user.email}">E-Mail</th>
+        <th th:text="#{user.role}">Role</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="user :${users}">
+        <td><a th:href="@{'/users/' + ${user.id}}" th:text="${user.username}"/></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.role}"></td>
+      </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+
+</th:block>
+</html>

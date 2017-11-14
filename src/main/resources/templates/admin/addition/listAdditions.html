@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<th:block layout:fragment="content">
+
+  <div class="four wide column">
+    <h1 th:text="#{common.additions}">Additions</h1>
+  </div>
+  <div class="ten wide column">
+    <a class="ui teal button" th:href="@{/admin/additions/new}">
+      <i class="add circle icon"></i>
+      <i th:text="#{addition.new}"></i>
+    </a>
+  </div>
+
+  <div class="row">
+    <table class="ui celled table">
+      <thead>
+      <tr>
+        <th th:text="#{common.id}">ID</th>
+        <th th:text="#{common.date}">Date</th>
+        <th th:text="#{common.customer}">Customer</th>
+        <th th:text="#{common.price}">Price</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="addition :${additions}">
+        <td><a th:href="@{'/admin/additions/' + ${addition.id}}" th:text="${addition.id}"/></td>
+        <td th:text="${addition.date}"></td>
+        <td th:text="${addition.customer.fullName}"></td>
+        <td th:text="${addition.price}"></td>
+      </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+  </div>
+
+</th:block>
+</html>

@@ -1,0 +1,38 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout">
+<th:block layout:fragment="content">
+
+  <div class="sixteen wide column">
+    <div class="ui middle aligned center aligned grid">
+      <div class="column">
+        <h2 class="ui teal image header">
+          <div th:text="#{common.login}" class="content">
+            Log-in to your account
+          </div>
+        </h2>
+        <form class="ui large form" th:action="@{/login}" method="post">
+          <div class="ui stacked segment">
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="username" th:placeholder="#{user.username}" />
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" th:placeholder="#{user.password}" />
+              </div>
+            </div>
+            <button th:text="#{common.login}" class="ui fluid large teal submit button">Login</button>
+          </div>
+
+          <div class="ui error message"></div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</th:block>
+</html>
+

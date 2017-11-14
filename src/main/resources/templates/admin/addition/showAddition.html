@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+
+<th:block layout:fragment="content">
+
+  <h4 th:text="#{addition.detail}" class="ui horizontal divider header">Addition Detail</h4>
+
+  <table class="ui customer table">
+    <tbody>
+    <tr>
+      <th th:text="#{common.id}">ID</th>
+      <th th:text="#{common.customer}">Customer</th>
+      <th th:text="#{common.date}">Date</th>
+    </tr>
+    <tr>
+      <td th:text="${addition.id}"></td>
+      <td><a th:href="@{'/admin/customers/' + ${addition.customer.id}}" th:text="${addition.customer.fullName}"/></td>
+      <td th:text="${addition.date}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h4 th:text="#{common.purchased}" class="ui horizontal divider header">Purchased</h4>
+
+  <table class="ui customer table">
+    <thead>
+    <tr>
+      <th th:text="#{common.name}">Name</th>
+      <th th:text="#{common.price}">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="food :${addition.foods}">
+      <td><a th:href="@{'/admin/foods/' + ${food.id}}" th:text="${food.name}"/></td>
+      <td th:text="${food.price}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+</th:block>
+
+</html>

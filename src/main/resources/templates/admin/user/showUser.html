@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+
+<th:block layout:fragment="content">
+
+  <h4 th:text="#{room.detail}" class="ui horizontal divider header">Room Detail</h4>
+
+  <table class="ui user table">
+    <tbody>
+    <tr>
+      <th th:text="#{user.username}">Username</th>
+      <th th:text="#{user.email}">E-Mail</th>
+      <th th:text="#{user.role}">Role</th>
+    </tr>
+    <tr>
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.email}"></td>
+      <td th:text="${user.role}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+</th:block>
+
+</html>
