@@ -32,10 +32,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="food :${addition.foods}">
-      <td><a th:href="@{'/admin/foods/' + ${food.id}}" th:text="${food.name}"/></td>
-      <td th:text="${food.quantity}"></td>
-      <td th:text="${food.price}"></td>
+    <tr th:each="pr: ${addition.foods}">
+      <td th:text="${pr.key.getName()}"/></td>
+      <td th:text="${pr.value}"/></td>
+      <td th:text="${pr.key.getPrice() * pr.value}"/></td>
     </tr>
     </tbody>
   </table>

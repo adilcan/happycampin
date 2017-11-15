@@ -32,9 +32,9 @@
               </tr>
               </thead>
               <tbody>
-              <tr th:each="pr, stat: ${eatData}">
-                <td><input type="text" name="value" th:value="${pr.key}" readonly="true"/></td>
-                <td><input type="number" name="value" th:field="*{eatMap[__${pr.key}__]}"/></td>
+              <tr th:each="entry: ${eatData}">
+                <td><input type="text" th:value="${entry.key.name}" readonly="true"/></td>
+                <td><input type="number" th:field="*{eatMap[__${entry.key.name}__]}"/></td>
               </tr>
               </tbody>
               <tfoot></tfoot>
@@ -51,9 +51,9 @@
               </tr>
               </thead>
               <tbody>
-              <tr th:each="pr, stat: ${drinkData}">
-                <td><input type="text" name="value" th:value="${pr.key}" readonly="true"/></td>
-                <td><input type="number" name="value" th:field="*{drinkMap[__${pr.key}__]}"/></td>
+              <tr th:each="entry: ${drinkData}">
+                <td><input type="text" name="value" th:value="${entry.key.name}" readonly="true"/></td>
+                <td><input type="number" name="value" th:field="*{drinkMap[__${entry.key.name}__]}"/></td>
               </tr>
               </tbody>
               <tfoot></tfoot>

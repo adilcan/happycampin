@@ -3,11 +3,11 @@ package in.happycamp.management.domain;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created on November, 2017
@@ -22,8 +22,8 @@ import java.util.List;
 @Builder
 public class Addition extends BaseEntity {
 
-	@ManyToMany
-	private List<Food> foods;
+	@ElementCollection
+	private Map<Food, Integer> foods;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;

@@ -51,15 +51,15 @@ public class AdditionController {
 	@GetMapping("/new")
 	public String getAdditionForm(Model model) {
 
-		Map<String, Integer> eatData = new HashMap<>();
-		Map<String, Integer> drinkData = new HashMap<>();
+		Map<Food, Integer> eatData = new HashMap<>();
+		Map<Food, Integer> drinkData = new HashMap<>();
 
 		for(Food f : foodRepository.findByFoodType(FoodType.EAT)){
-			eatData.put(f.getName(), 0);
+			eatData.put(f, 0);
 		}
 
 		for(Food f : foodRepository.findByFoodType(FoodType.DRINK)){
-			drinkData.put(f.getName(), 0);
+			drinkData.put(f, 0);
 		}
 
 		model.addAttribute("additionDto", new AdditionDto());

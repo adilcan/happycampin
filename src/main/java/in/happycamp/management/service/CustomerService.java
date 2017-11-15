@@ -10,9 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,32 +31,25 @@ public class CustomerService {
 	@Autowired
 	private FoodRepository foodRepository;
 
-	public List<Food> getGeneralAddition(Customer customer) {
-		Map<String, Integer> foodMap = new HashMap<>();
-		List<Food> foods = new ArrayList<>();
-		int counter = 0;
+	public Map<Food, Integer> getGeneralAddition(Customer customer) {
+		Map<Food, Integer> foodMap = new HashMap<>();
+
 		for (Addition a : customer.getAdditions()) {
 
-			for (Food f : a.getFoods()) {
+			for (Map.Entry<Food, Integer> entry : a.getFoods().entrySet()) {
 
-				if (foodMap.containsKey(f.getName()) && f.getQuantity() != null) {
+				if (foodMap.containsKey(entry.getKey())) {
 
-					foodMap.replace(f.getName(), f.getQuantity() + 1);
+					foodMap.replace(entry.getKey(), entry.getValue() + foodMap.get(entry.getKey()));
 				}
 
 				else {
-					foodMap.put(f.getName(), f.getQuantity());
+					foodMap.put(entry.getKey(), entry.getValue());
 				}
 			}
 		}
 
-		for(Map.Entry<String, Integer> entry : foodMap.entrySet()){
-			Food f = foodRepository.findByName(entry.getKey());
-			f.setQuantity(entry.getValue());
-			foods.add(f);
-		}
-
-		return foods;
+		return foodMap;
 	}
 
 	public void save(Customer customer) {

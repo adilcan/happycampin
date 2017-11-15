@@ -30,12 +30,14 @@
     <tr>
       <th th:text="#{common.food}">Food</th>
       <th th:text="#{common.quantity}">Quantity</th>
+      <th th:text="#{common.price}">Price</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="food :${generalAddition}">
-      <td th:text="${food.name}"></td>
-      <td th:text="${food.quantity}"></td>
+    <tr th:each="pr: ${generalAddition}">
+      <td th:text="${pr.key.getName()}"/></td>
+      <td th:text="${pr.value}"/></td>
+      <td th:text="${pr.value * pr.key.getPrice()}"/></td>
     </tr>
     </tbody>
   </table>
