@@ -4,6 +4,7 @@ import in.happycamp.management.domain.Customer;
 import in.happycamp.management.repository.AdditionRepository;
 import in.happycamp.management.repository.CustomerRepository;
 import in.happycamp.management.repository.RoomRepository;
+import in.happycamp.management.service.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+
+	@Autowired
+	private CustomerService customerService;
 
 	@Autowired
 	private RoomRepository roomRepository;
@@ -65,7 +69,7 @@ public class CustomerController {
 		}
 
 		model.addAttribute("customer", customerOptional.get());
-
+		model.addAttribute("generalAddition", customerService.getGeneralAddition(customerOptional.get()));
 		return "admin/customer/showCustomer";
 	}
 }

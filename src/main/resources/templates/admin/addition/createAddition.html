@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <th:block layout:fragment="content">
   <div class="row">
     <div class="ui secondary pointing fluid menu">
@@ -8,11 +8,11 @@
   </div>
   <div class="row">
     <div class="ui container">
-      <form class="ui addition form" method="post" th:action="@{/admin/additions/new}" th:object="${addition}">
+      <form class="ui addition form" method="post" th:action="@{/admin/additions/new}" th:object="${additionDto}">
 
         <div class="field">
           <label th:text="#{common.customer}">Customer</label>
-          <select class="ui fluid dropdown" th:field="*{customer}">
+          <select class="ui fluid search selection dropdown" th:field="*{customer}">
             <option th:text="#{common.customer}" value="">Customer</option>
             <option th:each="customer :${customers}"
                     th:value="${customer.id}"
@@ -20,18 +20,46 @@
           </select>
         </div>
 
-        <div class="field">
-          <select class="ui fluid search dropdown" multiple="" th:field="*{foods}">
-            <option th:text="#{common.foods}" value="">Foods</option>
-            <option th:each="food :${foods}"
-                    th:value="${food.id}"
-                    th:text="${food.name}"></option>
-          </select>
-        </div>
+        <div class="ui two column centered grid">
 
-        <div class="field">
-          <label th:text="#{common.date}" for="date">Date</label>
-          <input type="date" id="date" th:placeholder="#{common.date}" th:field="*{date}" />
+          <div class="column">
+            <h4 th:text="#{food.eats}" class="ui centered header">Eats</h4>
+            <table class="ui celled table">
+              <thead>
+              <tr>
+                <th th:text="#{common.name}">Name</th>
+                <th th:text="#{common.quantity}">Quantity</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="pr, stat: ${eatData}">
+                <td><input type="text" name="value" th:value="${pr.key}" readonly="true"/></td>
+                <td><input type="number" name="value" th:field="*{eatMap[__${pr.key}__]}"/></td>
+              </tr>
+              </tbody>
+              <tfoot></tfoot>
+            </table>
+          </div>
+
+          <div class="column">
+            <h4 th:text="#{food.drinks}" class="ui centered header">Eats</h4>
+            <table class="ui celled table">
+              <thead>
+              <tr>
+                <th th:text="#{common.name}">Name</th>
+                <th th:text="#{common.quantity}">Quantity</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="pr, stat: ${drinkData}">
+                <td><input type="text" name="value" th:value="${pr.key}" readonly="true"/></td>
+                <td><input type="number" name="value" th:field="*{drinkMap[__${pr.key}__]}"/></td>
+              </tr>
+              </tbody>
+              <tfoot></tfoot>
+            </table>
+          </div>
+
         </div>
 
         <button th:text="#{common.create}" class="ui button" type="submit">Create</button>

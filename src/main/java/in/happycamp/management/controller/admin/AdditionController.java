@@ -1,6 +1,9 @@
 package in.happycamp.management.controller.admin;
 
 import in.happycamp.management.domain.Addition;
+import in.happycamp.management.domain.AdditionDto;
+import in.happycamp.management.domain.Food;
+import in.happycamp.management.domain.FoodType;
 import in.happycamp.management.repository.AdditionRepository;
 import in.happycamp.management.repository.CustomerRepository;
 import in.happycamp.management.repository.FoodRepository;
@@ -13,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -26,16 +31,16 @@ import java.util.Optional;
 public class AdditionController {
 
 	@Autowired
-	AdditionRepository additionRepository;
+	private AdditionRepository additionRepository;
 
 	@Autowired
-	AdditionService additionService;
+	private AdditionService additionService;
 
 	@Autowired
-	CustomerRepository customerRepository;
+	private CustomerRepository customerRepository;
 
 	@Autowired
-	FoodRepository foodRepository;
+	private FoodRepository foodRepository;
 
 	@GetMapping("")
 	public String listAdditions(Model model) {
@@ -45,20 +50,34 @@ public class AdditionController {
 
 	@GetMapping("/new")
 	public String getAdditionForm(Model model) {
-		model.addAttribute("addition", new Addition());
+
+		Map<String, Integer> eatData = new HashMap<>();
+		Map<String, Integer> drinkData = new HashMap<>();
+
+		for(Food f : foodRepository.findByFoodType(FoodType.EAT)){
+			eatData.put(f.getName(), 0);
+		}
+
+		for(Food f : foodRepository.findByFoodType(FoodType.DRINK)){
+			drinkData.put(f.getName(), 0);
+		}
+
+		model.addAttribute("additionDto", new AdditionDto());
 		model.addAttribute("customers", customerRepository.findAll());
-		model.addAttribute("foods", foodRepository.findAll());
+		model.addAttribute("eatData", eatData);
+		model.addAttribute("drinkData", drinkData);
+
 		return "admin/addition/createAddition";
 	}
 
 	@PostMapping("/new")
-	public String postAdditionForm(@ModelAttribute @Valid Addition addition, BindingResult bindingResult) {
+	public String postAdditionForm(@ModelAttribute @Valid AdditionDto additionDto, BindingResult bindingResult) {
 
 		if (bindingResult.hasErrors()) {
 			return "admin/addition/createAddition";
 		}
 
-		additionService.save(addition);
+		additionService.save(additionDto);
 		return "redirect:/admin/additions";
 	}
 

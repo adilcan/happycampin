@@ -5,6 +5,7 @@ import in.happycamp.management.repository.AdditionRepository;
 import in.happycamp.management.repository.CustomerRepository;
 import in.happycamp.management.repository.FoodRepository;
 import in.happycamp.management.repository.RoomRepository;
+import in.happycamp.management.service.AdditionService;
 import in.happycamp.management.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,8 @@ public class SetupInitialData implements CommandLineRunner{
 	private final CustomerRepository customerRepository;
 
 	private final FoodRepository foodRepository;
+
+	private final AdditionService additionService;
 
 	private final AdditionRepository additionRepository;
 
@@ -157,9 +160,6 @@ public class SetupInitialData implements CommandLineRunner{
 				.build();
 
 		additionRepository.save(addition2);
-
-
-
 
 	}
 }

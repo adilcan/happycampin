@@ -27,12 +27,14 @@
     <thead>
     <tr>
       <th th:text="#{common.name}">Name</th>
+      <th th:text="#{common.quantity}">Price</th>
       <th th:text="#{common.price}">Price</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="food :${addition.foods}">
       <td><a th:href="@{'/admin/foods/' + ${food.id}}" th:text="${food.name}"/></td>
+      <td th:text="${food.quantity}"></td>
       <td th:text="${food.price}"></td>
     </tr>
     </tbody>

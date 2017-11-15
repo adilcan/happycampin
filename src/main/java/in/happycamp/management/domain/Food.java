@@ -26,4 +26,6 @@ public class Food extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private FoodType foodType;
 
+	private Integer quantity;
+
 }

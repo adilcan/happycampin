@@ -6,5 +6,5 @@ package in.happycamp.management.domain;
  * @author adilcan
  */
 public enum FoodType {
-	EAT, DRINK, DESSERT;
+	EAT, DRINK;
 }

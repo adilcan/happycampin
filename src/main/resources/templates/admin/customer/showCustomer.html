@@ -23,6 +23,23 @@
     </tbody>
   </table>
 
+  <h4 th:text="#{common.general_addition}" class="ui horizontal divider header">General Addition</h4>
+
+  <table class="ui customer table">
+    <thead>
+    <tr>
+      <th th:text="#{common.food}">Food</th>
+      <th th:text="#{common.quantity}">Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="food :${generalAddition}">
+      <td th:text="${food.name}"></td>
+      <td th:text="${food.quantity}"></td>
+    </tr>
+    </tbody>
+  </table>
+
   <h4 th:text="#{common.additions}" class="ui horizontal divider header">Additions</h4>
 
   <table class="ui customer table">
