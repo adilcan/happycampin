@@ -2,12 +2,10 @@ package in.happycamp.management.controller.admin;
 
 import in.happycamp.management.domain.Addition;
 import in.happycamp.management.domain.AdditionDto;
-import in.happycamp.management.domain.Food;
-import in.happycamp.management.domain.FoodType;
 import in.happycamp.management.repository.AdditionRepository;
 import in.happycamp.management.repository.CustomerRepository;
-import in.happycamp.management.repository.FoodRepository;
 import in.happycamp.management.service.AdditionService;
+import in.happycamp.management.service.FoodService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -40,7 +36,7 @@ public class AdditionController {
 	private CustomerRepository customerRepository;
 
 	@Autowired
-	private FoodRepository foodRepository;
+	private FoodService foodService;
 
 	@GetMapping("")
 	public String listAdditions(Model model) {
@@ -51,21 +47,10 @@ public class AdditionController {
 	@GetMapping("/new")
 	public String getAdditionForm(Model model) {
 
-		Map<Food, Integer> eatData = new HashMap<>();
-		Map<Food, Integer> drinkData = new HashMap<>();
-
-		for(Food f : foodRepository.findByFoodType(FoodType.EAT)){
-			eatData.put(f, 0);
-		}
-
-		for(Food f : foodRepository.findByFoodType(FoodType.DRINK)){
-			drinkData.put(f, 0);
-		}
-
 		model.addAttribute("additionDto", new AdditionDto());
 		model.addAttribute("customers", customerRepository.findAll());
-		model.addAttribute("eatData", eatData);
-		model.addAttribute("drinkData", drinkData);
+		model.addAttribute("eatData", foodService.getAllEats());
+		model.addAttribute("drinkData", foodService.getAllDrinks());
 
 		return "admin/addition/createAddition";
 	}

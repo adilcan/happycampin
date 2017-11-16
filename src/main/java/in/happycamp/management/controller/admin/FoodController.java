@@ -23,7 +23,7 @@ import java.util.Optional;
 public class FoodController {
 
 	@Autowired
-	FoodRepository foodRepository;
+	private FoodRepository foodRepository;
 
 	@GetMapping("/new")
 	public String getFoodFrom(Model model) {

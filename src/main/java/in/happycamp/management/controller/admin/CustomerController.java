@@ -4,7 +4,9 @@ import in.happycamp.management.domain.Customer;
 import in.happycamp.management.repository.AdditionRepository;
 import in.happycamp.management.repository.CustomerRepository;
 import in.happycamp.management.repository.RoomRepository;
+import in.happycamp.management.service.AdditionService;
 import in.happycamp.management.service.CustomerService;
+import in.happycamp.management.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +39,12 @@ public class CustomerController {
 	@Autowired
 	private AdditionRepository additionRepository;
 
+	@Autowired
+	private PaymentService paymentService;
+
+	@Autowired
+	private AdditionService additionService;
+
 	@GetMapping("/new")
 	public String getCustomerForm(Model model) {
 		model.addAttribute("customer", new Customer());
@@ -63,13 +71,17 @@ public class CustomerController {
 
 	@GetMapping("/{id}")
 	public String showCustomer(@PathVariable("id") Long id, Model model) {
+
 		Optional<Customer> customerOptional = customerRepository.findById(id);
+
 		if (!customerOptional.isPresent()) {
 			log.warn("Customer with id: {} not found.", id);
 		}
 
 		model.addAttribute("customer", customerOptional.get());
-		model.addAttribute("generalAddition", customerService.getGeneralAddition(customerOptional.get()));
+		model.addAttribute("generalAddition", additionService.getGeneralAddition(customerOptional.get()));
+		model.addAttribute("paymentInfo", paymentService.getPaymentInfo(customerOptional.get()));
+
 		return "admin/customer/showCustomer";
 	}
 }

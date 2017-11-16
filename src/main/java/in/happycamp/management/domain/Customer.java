@@ -2,6 +2,8 @@ package in.happycamp.management.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -32,10 +34,12 @@ public class Customer extends BaseEntity {
 	@ManyToOne
 	private Room room;
 
-	@OneToOne
-	private Bill bill;
-
 	@JsonIgnore
 	@OneToMany(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Payment> payments;
+
+	@JsonIgnore
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Addition> additions;
 }

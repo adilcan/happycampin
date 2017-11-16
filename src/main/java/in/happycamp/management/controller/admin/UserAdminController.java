@@ -24,10 +24,10 @@ import java.util.Optional;
 public class UserAdminController {
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	@GetMapping("/new")
 	public String getCreateUser(Model model) {

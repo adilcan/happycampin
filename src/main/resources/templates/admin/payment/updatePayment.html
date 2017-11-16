@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
+>
+<th:block layout:fragment="content">
+  <div class="row">
+    <div class="ui secondary pointing fluid menu">
+      <h2 th:text="#{payment.update}" class="ui header">Update Payment</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="ui container">
+      <form class="ui payment form" method="post" th:action="@{'/admin/payments/' + ${payment.id} + '/update'" th:object="${payment}">
+
+        <div class="field">
+          <label th:text="#{common.customer}">Customer</label>
+          <select class="ui fluid search selection dropdown" th:field="*{customer}">
+            <option th:text="#{common.customer}" value="">Customer</option>
+            <option th:each="customer :${customers}"
+                    th:value="${customer.id}"
+                    th:text="${customer.fullName}"></option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label th:text="#{payment.type}">Payment Type</label>
+          <select class="ui fluid dropdown" th:field="*{paymentType}">
+            <option th:each="paymentType : ${T(in.happycamp.management.domain.PaymentType.values()}"
+                    th:value="${paymentType}"
+                    th:text="${paymentType}"></option>
+          </select>
+        </div>
+
+        <div class="ui right labeled input">
+          <label for="price" class="ui label">₺</label>
+          <input type="text" th:placeholder="#{common.price}" th:value="*{price}" th:field="*{price}" id="price">
+          <div class="ui basic label"></div>
+        </div>
+
+        <button th:text="#{common.update}" class="ui button" type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+</th:block>
+</html>

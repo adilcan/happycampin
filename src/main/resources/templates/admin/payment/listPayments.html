@@ -3,12 +3,12 @@
 <th:block layout:fragment="content">
 
   <div class="four wide column">
-    <h1 th:text="#{common.additions}">Additions</h1>
+    <h1 th:text="#{common.payments}">Payments</h1>
   </div>
   <div class="ten wide column">
-    <a class="ui teal button" th:href="@{/admin/additions/new}">
+    <a class="ui teal button" th:href="@{/admin/payments/new}">
       <i class="add circle icon"></i>
-      <i th:text="#{addition.new}"></i>
+      <i th:text="#{payment.new}"></i>
     </a>
   </div>
 
@@ -19,14 +19,15 @@
         <th th:text="#{common.date}">Date</th>
         <th th:text="#{common.customer}">Customer</th>
         <th th:text="#{common.price}">Price</th>
-
+        <th th:text="#{payment.type}">Type</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="addition :${additions}">
-        <td><a th:href="@{'/admin/additions/' + ${addition.id}}" th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"/></td>
-        <td th:text="${addition.customer.fullName}"></td>
-        <td th:text="${addition.price}"></td>
+      <tr th:each="payment :${payments}">
+        <td><a th:href="@{'/admin/payments/' + ${payment.id}}" th:text="${#dates.format(payment.date, 'dd-MM-yyyy')}"/></td>
+        <td th:text="${payment.customer.fullName}"></td>
+        <td th:text="${payment.price}"></td>
+        <td th:text="${payment.paymentType}"></td>
       </tr>
       </tbody>
       <tfoot></tfoot>

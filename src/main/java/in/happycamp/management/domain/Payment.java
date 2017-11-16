@@ -3,7 +3,8 @@ package in.happycamp.management.domain;
 import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import java.util.Date;
 
 /**
  * Created on November, 2017
@@ -16,15 +17,15 @@ import javax.persistence.OneToOne;
 @Setter
 @Entity
 @Builder
-public class Bill extends BaseEntity {
+public class Payment extends BaseEntity {
 
-	@OneToOne
+	@ManyToOne
 	private Customer customer;
 
-	private PaymentType paymentTypes;
+	private PaymentType paymentType;
 
-	private boolean isPaid = false;
+	private Double price;
 
-	private Double totalPrice;
+	private Date date;
 
 }

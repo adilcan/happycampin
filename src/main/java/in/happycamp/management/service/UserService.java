@@ -17,10 +17,10 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
 	@Autowired
-	PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	public void register(User user){
 		User u = User.builder()

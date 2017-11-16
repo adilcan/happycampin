@@ -24,10 +24,10 @@ import java.util.Optional;
 public class RoomController {
 
 	@Autowired
-	RoomRepository roomRepository;
+	private RoomRepository roomRepository;
 
 	@Autowired
-	CustomerRepository customerRepository;
+	private CustomerRepository customerRepository;
 
 	@GetMapping("/new")
 	public String getRoomForm(Model model) {

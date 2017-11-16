@@ -1,6 +1,6 @@
 package in.happycamp.management.repository;
 
-import in.happycamp.management.domain.Bill;
+import in.happycamp.management.domain.Payment;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  * @author adilcan
  */
 @Repository
-public interface BillRepository extends CrudRepository<Bill, Long> {
+public interface PaymentRepository extends CrudRepository<Payment, Long> {
 
 }
