@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <div class="ui container">
-      <form class="ui payment form" method="post" th:action="@{'/admin/payments/' + ${payment.id} + '/update'" th:object="${payment}">
+      <form class="ui payment form" method="post" th:action="@{'/admin/payments/' + ${payment.id} + '/update'}" th:object="${payment}">
 
         <div class="field">
           <label th:text="#{common.customer}">Customer</label>
@@ -23,7 +23,7 @@
         <div class="field">
           <label th:text="#{payment.type}">Payment Type</label>
           <select class="ui fluid dropdown" th:field="*{paymentType}">
-            <option th:each="paymentType : ${T(in.happycamp.management.domain.PaymentType.values()}"
+            <option th:each="paymentType : ${T(in.happycamp.management.domain.PaymentType).values()}"
                     th:value="${paymentType}"
                     th:text="${paymentType}"></option>
           </select>

@@ -60,4 +60,26 @@ public class FoodController {
 		return "admin/food/showFood";
 	}
 
+	@GetMapping("/{id}/update")
+	public String getFoodUpdate(@PathVariable("id") Long id, Model model) {
+
+		if (!foodRepository.findById(id).isPresent()) {
+			log.warn("Food with id: {} not found.", id);
+		}
+
+		model.addAttribute("food", foodRepository.findById(id).get());
+		return "admin/food/updateFood";
+	}
+
+	@PostMapping("/{id}/update")
+	public String postFoodUpdate(@ModelAttribute @Valid Food food, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			return "admin/food/updateFood";
+		}
+
+		foodRepository.save(food);
+		return "redirect:/admin/foods";
+	}
+
 }

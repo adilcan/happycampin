@@ -64,5 +64,27 @@ public class RoomController {
 		return "admin/room/showRoom";
 	}
 
+	@GetMapping("/{id}/update")
+	public String getRoomUpdate(@PathVariable("id") Long id, Model model) {
+
+		if (!roomRepository.findById(id).isPresent()) {
+			log.warn("Room with id: {} not found.", id);
+		}
+
+		model.addAttribute("room", roomRepository.findById(id).get());
+		return "admin/room/updateRoom";
+	}
+
+	@PostMapping("/{id}/update")
+	public String postRoomUpdate(@ModelAttribute @Valid Room room, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			return "admin/room/updateRoom";
+		}
+
+		roomRepository.save(room);
+		return "redirect:/admin/rooms";
+	}
+
 
 }

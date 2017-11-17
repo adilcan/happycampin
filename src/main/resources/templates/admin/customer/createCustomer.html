@@ -16,6 +16,25 @@
         </div>
 
         <div class="field">
+          <label th:text="#{customer.email}" for="email">E-Mail Address</label>
+          <input type="text" id="email" th:placeholder="#{customer.email}" th:field="*{emailAddress}" />
+        </div>
+
+        <div class="field">
+          <label th:text="#{customer.phone}" for="phone">Phone</label>
+          <input type="text" id="phone" th:placeholder="#{customer.phone}" th:field="*{phoneNumber}" />
+        </div>
+
+        <div class="field">
+          <label th:text="#{customer.status}">Status</label>
+          <select class="ui fluid dropdown" th:field="*{statusType}">
+            <option th:each="statusType : ${T(in.happycamp.management.domain.StatusType).values()}"
+                    th:value="${statusType}"
+                    th:text="${statusType}"></option>
+          </select>
+        </div>
+
+        <div class="field">
           <label th:text="#{customer.arrival_date}" for="arrival_date">Arrival Date</label>
           <input type="date" id="arrival_date" th:placeholder="#{customer.arrival_date}" th:field="*{arrivalDate}" />
         </div>

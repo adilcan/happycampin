@@ -6,6 +6,7 @@ import in.happycamp.management.domain.Customer;
 import in.happycamp.management.domain.Food;
 import in.happycamp.management.repository.AdditionRepository;
 import in.happycamp.management.repository.FoodRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import java.util.Map;
  *
  * @author adilcan
  */
+@Slf4j
 @Service
 public class AdditionService {
 
@@ -27,7 +29,7 @@ public class AdditionService {
 	@Autowired
 	private FoodRepository foodRepository;
 
-	public void save(AdditionDto additionDto) {
+	public void create(AdditionDto additionDto) {
 		Map<Food, Integer> foods = new HashMap<>();
 
 		if (additionDto.getEatMap() != null) {
@@ -52,6 +54,41 @@ public class AdditionService {
 		for (Map.Entry<Food, Integer> entry : addition.getFoods().entrySet()) {
 			price = price + (entry.getKey().getPrice() * entry.getValue());
 		}
+		addition.setPrice(price);
+		additionRepository.save(addition);
+	}
+
+	public void update(AdditionDto additionDto, Long id) {
+		Map<Food, Integer> foods = new HashMap<>();
+
+		if (additionDto.getEatMap() != null) {
+			for (Map.Entry<String, Integer> entry : additionDto.getEatMap().entrySet()) {
+				if (entry.getValue() != null && entry.getValue() > 0) {
+					foods.put(foodRepository.findByName(entry.getKey()), entry.getValue());
+				}
+			}
+		}
+
+		if (additionDto.getDrinkMap() != null) {
+			for (Map.Entry<String, Integer> entry : additionDto.getDrinkMap().entrySet()) {
+				if (entry.getValue() != null && entry.getValue() > 0) {
+					foods.put(foodRepository.findByName(entry.getKey()), entry.getValue());
+				}
+			}
+		}
+
+		Addition addition = additionRepository.findById(id).get();
+
+		Double price = 0.0;
+		for (Map.Entry<Food, Integer> entry : foods.entrySet()) {
+			price = price + (entry.getKey().getPrice() * entry.getValue());
+		}
+
+		if (additionDto.getCustomer() != null) {
+			addition.setCustomer(additionDto.getCustomer());
+		}
+
+		addition.setFoods(foods);
 		addition.setPrice(price);
 		additionRepository.save(addition);
 	}

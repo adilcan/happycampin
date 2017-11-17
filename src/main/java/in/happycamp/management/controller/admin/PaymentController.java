@@ -47,7 +47,7 @@ public class PaymentController {
 			return "admin/payment/payments";
 		}
 
-		paymentService.save(payment);
+		paymentService.create(payment);
 		return "redirect:/admin/payments";
 	}
 
@@ -67,5 +67,27 @@ public class PaymentController {
 		model.addAttribute("payment", paymentOptional.get());
 
 		return "admin/payment/showPayment";
+	}
+
+	@GetMapping("/{id}/update")
+	public String getPaymentUpdate(@PathVariable("id") Long id, Model model) {
+
+		if (!paymentRepository.findById(id).isPresent()) {
+			log.warn("Payment with id: {} not found.", id);
+		}
+
+		model.addAttribute("payment", paymentRepository.findById(id).get());
+		model.addAttribute("customers", customerRepository.findAll());
+		return "admin/payment/updatePayment";
+	}
+
+	@PostMapping("/{id}/update")
+	public String postPaymentUpdate(@PathVariable("id") Long id, @ModelAttribute @Valid Payment payment, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			return "admin/payment/updatePayment";
+		}
+		paymentService.update(payment, id);
+		return "redirect:/admin/payments";
 	}
 }

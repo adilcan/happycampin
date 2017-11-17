@@ -8,7 +8,7 @@
   </div>
   <div class="row">
     <div class="ui container">
-      <form class="ui user form" method="post" th:action="@{'/users/' + ${user.id} + '/update'}" th:object="${user}">
+      <form class="ui user form" method="post" th:action="@{'/admin/users/' + ${user.id} + '/update'}" th:object="${user}">
 
         <div class="field">
           <label th:text="#{user.username}" for="username">Username</label>

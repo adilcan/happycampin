@@ -3,45 +3,54 @@
 
 
 <th:block layout:fragment="content">
+  <div class="four wide centered column">
+    <h2 th:text="#{room.detail}" class="ui horizontal header">Room Detail</h2>
+  </div>
+  <div class="ten wide centered column">
+    <a class="ui teal button" th:href="@{'/admin/rooms/' + *{id} + '/update'}">
+      <i class="add circle icon"></i>
+      <i th:text="#{common.update}"></i>
+    </a>
+  </div>  <div class="container">
 
-  <h4 th:text="#{room.detail}" class="ui horizontal divider header">Room Detail</h4>
+    <table class="ui room table">
+      <thead>
+      <tr>
+        <th th:text="#{room.code}">Code</th>
+        <th th:text="#{room.capacity}">Capacity</th>
+        <th th:text="#{common.price}">Price</th>
+        <th th:text="#{common.type}">roomType</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td th:text="${room.code}"></td>
+        <td th:text="${room.capacity}"></td>
+        <td th:text="${room.price}"></td>
+        <td th:text="${room.roomType}"></td>
+      </tr>
+      </tbody>
+    </table>
 
-  <table class="ui customer table">
-    <tbody>
-    <tr>
-      <th th:text="#{room.code}">Code</th>
-      <th th:text="#{room.capacity}">Capacity</th>
-      <th th:text="#{common.price}">Price</th>
-      <th th:text="#{common.type}">roomType</th>
-    </tr>
-    <tr>
-      <td th:text="${room.code}"></td>
-      <td th:text="${room.capacity}"></td>
-      <td th:text="${room.price}"></td>
-      <td th:text="${room.roomType}"></td>
-    </tr>
-    </tbody>
-  </table>
+    <h4 th:text="#{common.guests}" class="ui horizontal divider header">Guests</h4>
 
-  <h4 th:text="#{common.guests}" class="ui horizontal divider header">Guests</h4>
-
-  <table class="ui customer table">
-    <thead>
-    <tr>
-      <th th:text="#{customer.name}">Name</th>
-      <th th:text="#{customer.arrival_date}">Arrival Date</th>
-      <th th:text="#{customer.return_date}">Return Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="customer :${room.customers}">
-      <td><a th:href="@{'/admin/customers/' + ${customer.id}}" th:text="${customer.fullName}"/></td>
-      <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
-      <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>
-    </tr>
-    </tbody>
-  </table>
-
+    <table class="ui customer table">
+      <thead>
+      <tr>
+        <th th:text="#{customer.name}">Name</th>
+        <th th:text="#{customer.arrival_date}">Arrival Date</th>
+        <th th:text="#{customer.return_date}">Return Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="customer :${room.customers}">
+        <td><a th:href="@{'/admin/customers/' + ${customer.id}}" th:text="${customer.fullName}"/></td>
+        <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
+        <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </th:block>
 
 </html>

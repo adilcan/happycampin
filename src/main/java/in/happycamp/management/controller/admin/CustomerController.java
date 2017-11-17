@@ -84,4 +84,27 @@ public class CustomerController {
 
 		return "admin/customer/showCustomer";
 	}
+
+	@GetMapping("/{id}/update")
+	public String getCustomerUpdate(@PathVariable("id") Long id, Model model) {
+
+		if (!customerRepository.findById(id).isPresent()) {
+			log.warn("Customer with id: {} not found.", id);
+		}
+
+		model.addAttribute("customer", customerRepository.findById(id).get());
+		model.addAttribute("rooms", roomRepository.findAll());
+		return "admin/customer/updateCustomer";
+	}
+
+	@PostMapping("/{id}/update")
+	public String postCustomerUpdate(@ModelAttribute @Valid Customer customer, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			return "admin/customer/updateCustomer";
+		}
+
+		customerRepository.save(customer);
+		return "redirect:/admin/customers";
+	}
 }

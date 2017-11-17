@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 @Slf4j
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/admin/users")
 public class UserAdminController {
 
 	@Autowired
@@ -43,7 +43,7 @@ public class UserAdminController {
 		}
 
 		userService.register(user);
-		return "redirect:/login";
+		return "redirect:/admin/users";
 	}
 
 	@GetMapping("")

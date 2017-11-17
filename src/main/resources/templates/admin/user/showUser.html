@@ -4,7 +4,15 @@
 
 <th:block layout:fragment="content">
 
-  <h4 th:text="#{room.detail}" class="ui horizontal divider header">Room Detail</h4>
+  <div class="four wide centered column">
+    <h2 th:text="#{user.detail}" class="ui horizontal header">User Detail</h2>
+  </div>
+  <div class="ten wide centered column">
+    <a class="ui teal button" th:href="@{'/admin/users/' + *{id} + '/update'}">
+      <i class="add circle icon"></i>
+      <i th:text="#{common.update}"></i>
+    </a>
+  </div>
 
   <table class="ui user table">
     <tbody>

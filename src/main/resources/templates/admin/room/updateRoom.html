@@ -26,7 +26,7 @@
         </div>
 
         <div class="field">
-          <label th:text="#{room.type}">Room Type</label>
+          <label th:text="#{common.type}">Room Type</label>
           <select class="ui fluid dropdown" th:field="*{roomType}">
             <option th:each="roomType : ${T(in.happycamp.management.domain.RoomType).values()}"
                     th:value="${roomType}"

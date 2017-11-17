@@ -1,12 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
 >
 <th:block layout:fragment="content">
-  <div class="container">
-    <div class="ui center aligned segment">
-      <h1 th:text="#{common.welcome}">Welcome</h1>
+  <div class="ui center aligned segment">
+    <h1 th:text="#{common.welcome}">Welcome</h1>
+    <div class="container">
 
-    <div class="ui two column centered grid">
-      <div class="row">
+      <div class="ui two column centered grid">
         <div class="column">
           <h3 th:text="#{chart.room_distro}" class="ui center aligned blue header">Chart</h3>
           <canvas id="roomTypeChart" width="600" height="600"></canvas>
@@ -16,7 +15,6 @@
           <canvas id="roomSizeChart" width="400" height="400"></canvas>
         </div>
       </div>
-    </div>
     </div>
   </div>
   <script th:inline="javascript">
@@ -53,6 +51,7 @@
     },
     options: {}
     });
+
 
 
 

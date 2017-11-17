@@ -62,7 +62,7 @@ public class AdditionController {
 			return "admin/addition/createAddition";
 		}
 
-		additionService.save(additionDto);
+		additionService.create(additionDto);
 		return "redirect:/admin/additions";
 	}
 
@@ -75,6 +75,33 @@ public class AdditionController {
 
 		model.addAttribute("addition", additionOptional.get());
 		return "admin/addition/showAddition";
+	}
+
+	@GetMapping("/{id}/update")
+	public String getAdditionUpdateForm(@PathVariable("id") Long id, Model model) {
+
+		if (!additionRepository.findById(id).isPresent()) {
+			log.warn("Addition with id: {} not found.", id);
+		}
+
+		model.addAttribute("addition", additionRepository.findById(id).get());
+		model.addAttribute("additionDto", new AdditionDto());
+		model.addAttribute("customers", customerRepository.findAll());
+		model.addAttribute("eatData", foodService.getEatsByAddition(additionRepository.findById(id).get()));
+		model.addAttribute("drinkData", foodService.getDrinksByAddition(additionRepository.findById(id).get()));
+
+		return "admin/addition/updateAddition";
+	}
+
+	@PostMapping("/{id}/update")
+	public String postAdditionUpdateForm(@PathVariable("id") Long id, @ModelAttribute @Valid AdditionDto additionDto, BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			return "admin/addition/updateAddition";
+		}
+
+		additionService.update(additionDto, id);
+		return "redirect:/admin/additions";
 	}
 }
 

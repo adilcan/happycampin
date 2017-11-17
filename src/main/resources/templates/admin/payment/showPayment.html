@@ -4,8 +4,15 @@
 
 <th:block layout:fragment="content">
 
-  <h4 th:text="#{payment.detail}" class="ui horizontal divider header">Payment Detail</h4>
-
+  <div class="four wide centered column">
+    <h2 th:text="#{payment.detail}" class="ui horizontal header">Payment Detail</h2>
+  </div>
+  <div class="ten wide centered column">
+    <a class="ui teal button" th:href="@{'/admin/payments/' + *{id} + '/update'}">
+      <i class="add circle icon"></i>
+      <i th:text="#{common.update}"></i>
+    </a>
+  </div>
   <table class="ui payment table">
     <tbody>
     <tr>
@@ -16,7 +23,7 @@
     </tr>
     <tr>
       <td th:text="${#dates.format(payment.date, 'dd-MM-yyyy')}"></td>
-      <td th:text="${payment.customer.name}"></td>
+      <td th:text="${payment.customer.fullName}"></td>
       <td th:text="${payment.price}"></td>
       <td th:text="${payment.paymentType}"></td>
     </tr>

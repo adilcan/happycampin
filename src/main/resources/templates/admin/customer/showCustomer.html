@@ -3,14 +3,23 @@
 
 
 <th:block layout:fragment="content">
-
-  <h2 th:text="#{customer.detail}" class="ui horizontal divider header">Customer Detail</h2>
-  <div class="container">
+  <div class="four wide centered column">
+    <h2 th:text="#{customer.detail}" class="ui horizontal header">Customer Detail</h2>
+  </div>
+  <div class="ten wide centered column">
+    <a class="ui teal button" th:href="@{'/admin/customers/' + *{id} + '/update'}">
+      <i class="add circle icon"></i>
+      <i th:text="#{common.update}"></i>
+    </a>
+  </div>  <div class="container">
 
     <table class="ui customer table">
       <thead>
       <tr>
         <th th:text="#{customer.name}">Name</th>
+        <th th:text="#{customer.email}">E-Mail</th>
+        <th th:text="#{customer.phone}">Phone</th>
+        <th th:text="#{customer.status}">Status</th>
         <th th:text="#{common.room}">Room</th>
         <th th:text="#{customer.arrival_date}">Arrival Date</th>
         <th th:text="#{customer.return_date}">Return Date</th>
@@ -19,6 +28,9 @@
       <tbody>
       <tr>
         <td th:text="${customer.fullName}"></td>
+        <td th:text="${customer.emailAddress}"></td>
+        <td th:text="${customer.phoneNumber}"></td>
+        <td th:text="${customer.statusType}"></td>
         <td><a th:href="@{'/admin/rooms/' + ${customer.room.id}}" th:text="${customer.room.code}"/></td>
         <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
         <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>

@@ -24,8 +24,13 @@ public class PaymentService {
 	@Autowired
 	private PaymentRepository paymentRepository;
 
-	public void save(Payment payment){
+	public void create(Payment payment){
 		payment.setDate(new Date());
+		paymentRepository.save(payment);
+	}
+
+	public void update(Payment payment, Long id){
+		payment.setDate(paymentRepository.findById(id).get().getDate());
 		paymentRepository.save(payment);
 	}
 

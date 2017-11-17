@@ -6,7 +6,7 @@
     <h1 th:text="#{common.users}">Users</h1>
   </div>
   <div class="ten wide column">
-    <a class="ui teal button" th:href="@{/users/new}">
+    <a class="ui teal button" th:href="@{/admin/users/new}">
       <i class="add circle icon"></i>
       <i th:text="#{user.new}"></i>
     </a>
@@ -23,7 +23,7 @@
       </thead>
       <tbody>
       <tr th:each="user :${users}">
-        <td><a th:href="@{'/users/' + ${user.id}}" th:text="${user.username}"/></td>
+        <td><a th:href="@{'/admin/users/' + ${user.id}}" th:text="${user.username}"/></td>
         <td th:text="${user.email}"></td>
         <td th:text="${user.role}"></td>
       </tr>

@@ -2,15 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <script th:src="@{/js/semantic.js}"></script>
+  <script th:src="@{/js/Chart.min.js}"></script>
+  <script th:src="@{/js/vis.min.js}"></script>
+
   <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/css/semantic.min.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/css/sweetalert.css}">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/vis.min.css}"/>
 
-  <script th:src="@{/js/semantic.js}"></script>
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
 </head>
@@ -30,35 +31,35 @@
         </a>
         <a class="item" th:href="@{/admin/rooms}">
           <i class="hotel large icon"></i>
-          <i th:text="#{common.rooms}"></i>
+          <p th:text="#{common.rooms}"></p>
         </a>
         <a class="item" th:href="@{/admin/customers}">
           <i class="user large icon"></i>
-          <i th:text="#{common.customers}"></i>
+          <p th:text="#{common.customers}"></p>
         </a>
         <a class="item" th:href="@{/admin/additions}">
           <i class="browser large icon"></i>
-          <i th:text="#{common.additions}"></i>
+          <p th:text="#{common.additions}"></p>
         </a>
         <a class="item" th:href="@{/admin/foods}">
           <i class="food large icon"></i>
-          <i th:text="#{common.foods}"></i>
+          <p th:text="#{common.foods}"></p>
         </a>
         <a class="item" th:href="@{/admin/payments}">
           <i class="payment large icon"></i>
-          <i th:text="#{common.payments}"></i>
+          <p th:text="#{common.payments}"></p>
         </a>
         <a class="item" th:href="@{/timeline}">
           <i class="calendar large icon"></i>
-          <i th:text="#{common.timeline}"></i>
+          <p th:text="#{common.timeline}"></p>
         </a>
-        <a class="item" th:href="@{/users}">
+        <a class="item" th:href="@{/admin/users}">
           <i class="users large icon"></i>
-          <i th:text="#{common.users}"></i>
+          <p th:text="#{common.users}"></p>
         </a>
         <div class="ui dropdown item">
-          <i th:text="#{common.language}"></i>
-          <i class="dropdown icon"></i>
+          <a th:text="#{common.language}"></a>
+          <p class="dropdown icon"></p>
           <div class="menu">
             <a id="en" class="item" href="#">English</a>
             <a id="tr" class="item" href="#">Türkçe</a>

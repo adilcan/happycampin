@@ -25,6 +25,10 @@ public class Customer extends BaseEntity {
 
 	private String fullName;
 
+	private String emailAddress;
+
+	private String phoneNumber;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date arrivalDate;
 
@@ -42,4 +46,7 @@ public class Customer extends BaseEntity {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<Addition> additions;
+
+	private StatusType statusType;
+
 }

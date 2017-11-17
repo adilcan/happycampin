@@ -5,7 +5,7 @@
   <div class="row">
     <h1 th:text="#{addition.update}">Update an Addition</h1>
     <div class="ui container">
-      <form class="ui addition form" method="post" th:action="@{@{'/admin/additions/' + ${addition.id} + '/update'}}" th:object="${addition}">
+      <form class="ui addition form" method="post" th:action="@{@{'/admin/additions/' + ${addition.id} + '/update'}}" th:object="${additionDto}">
 
         <div class="field">
           <label th:text="#{common.customer}">Customer</label>
@@ -17,17 +17,48 @@
           </select>
         </div>
 
-        <div class="field">
-          <label th:text="#{common.foods}" for="foods">Foods</label>
-          <th:block id="foods" th:each="food : ${foods}" th:field="*{foods}">
-            <td><input type="checkbox" th:value="${food.name}"/></td>
-          </th:block>
+        <div class="ui two column centered grid">
+
+          <div class="column">
+            <h4 th:text="#{food.eats}" class="ui centered header">Eats</h4>
+            <table class="ui celled table">
+              <thead>
+              <tr>
+                <th th:text="#{common.name}">Name</th>
+                <th th:text="#{common.quantity}">Quantity</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="entry: ${eatData}">
+                <td><input type="text" th:value="${entry.key}" readonly="true"/></td>
+                <td><input type="number" th:placeholder="${eatData.get(entry.key)}" th:field="*{eatMap[__${entry.key}__]}"/></td>
+              </tr>
+              </tbody>
+              <tfoot></tfoot>
+            </table>
+          </div>
+
+          <div class="column">
+            <h4 th:text="#{food.drinks}" class="ui centered header">Eats</h4>
+            <table class="ui celled table">
+              <thead>
+              <tr>
+                <th th:text="#{common.name}">Name</th>
+                <th th:text="#{common.quantity}">Quantity</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="entry: ${drinkData}">
+                <td><input type="text" name="value" th:value="${entry.key}" readonly="true"/></td>
+                <td><input type="number" th:placeholder="${drinkData.get(entry.key)}" th:field="*{drinkMap[__${entry.key}__]}"/></td>
+              </tr>
+              </tbody>
+              <tfoot></tfoot>
+            </table>
+          </div>
+
         </div>
 
-        <div class="field">
-          <label th:text="#{common.date}" for="date">Date</label>
-          <input type="date" id="date" th:placeholder="#{common.date}" th:value="*{date}" th:field="*{date}"/>
-        </div>
         <button th:text="#{common.update}" class="ui button" type="submit">Update</button>
       </form>
     </div>
