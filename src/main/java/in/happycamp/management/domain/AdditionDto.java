@@ -20,9 +20,6 @@ public class AdditionDto {
 
 	private Customer customer;
 
-	private Map<String, Integer> eatMap;
-
-	private Map<String, Integer> drinkMap;
-
+	private Map<String, Integer> foodMap;
 
 }

@@ -49,8 +49,7 @@ public class AdditionController {
 
 		model.addAttribute("additionDto", new AdditionDto());
 		model.addAttribute("customers", customerRepository.findAll());
-		model.addAttribute("eatData", foodService.getAllEats());
-		model.addAttribute("drinkData", foodService.getAllDrinks());
+		model.addAttribute("foodData", foodService.getFoodsAsMap());
 
 		return "admin/addition/createAddition";
 	}
@@ -87,8 +86,8 @@ public class AdditionController {
 		model.addAttribute("addition", additionRepository.findById(id).get());
 		model.addAttribute("additionDto", new AdditionDto());
 		model.addAttribute("customers", customerRepository.findAll());
-		model.addAttribute("eatData", foodService.getEatsByAddition(additionRepository.findById(id).get()));
-		model.addAttribute("drinkData", foodService.getDrinksByAddition(additionRepository.findById(id).get()));
+		model.addAttribute("foodData", foodService.getFoodsAsMapByAddition(additionRepository.findById(id).get()));
+		model.addAttribute("foodNames", foodService.getFoodNamesByAddition(additionRepository.findById(id).get()));
 
 		return "admin/addition/updateAddition";
 	}

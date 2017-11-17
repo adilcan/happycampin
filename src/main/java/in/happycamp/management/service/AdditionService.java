@@ -32,16 +32,8 @@ public class AdditionService {
 	public void create(AdditionDto additionDto) {
 		Map<Food, Integer> foods = new HashMap<>();
 
-		if (additionDto.getEatMap() != null) {
-			for (Map.Entry<String, Integer> entry : additionDto.getEatMap().entrySet()) {
-				if (entry.getValue() != null && entry.getValue() > 0) {
-					foods.put(foodRepository.findByName(entry.getKey()), entry.getValue());
-				}
-			}
-		}
-
-		if (additionDto.getDrinkMap() != null) {
-			for (Map.Entry<String, Integer> entry : additionDto.getDrinkMap().entrySet()) {
+		if (additionDto.getFoodMap() != null) {
+			for (Map.Entry<String, Integer> entry : additionDto.getFoodMap().entrySet()) {
 				if (entry.getValue() != null && entry.getValue() > 0) {
 					foods.put(foodRepository.findByName(entry.getKey()), entry.getValue());
 				}
@@ -61,16 +53,8 @@ public class AdditionService {
 	public void update(AdditionDto additionDto, Long id) {
 		Map<Food, Integer> foods = new HashMap<>();
 
-		if (additionDto.getEatMap() != null) {
-			for (Map.Entry<String, Integer> entry : additionDto.getEatMap().entrySet()) {
-				if (entry.getValue() != null && entry.getValue() > 0) {
-					foods.put(foodRepository.findByName(entry.getKey()), entry.getValue());
-				}
-			}
-		}
-
-		if (additionDto.getDrinkMap() != null) {
-			for (Map.Entry<String, Integer> entry : additionDto.getDrinkMap().entrySet()) {
+		if (additionDto.getFoodMap() != null) {
+			for (Map.Entry<String, Integer> entry : additionDto.getFoodMap().entrySet()) {
 				if (entry.getValue() != null && entry.getValue() > 0) {
 					foods.put(foodRepository.findByName(entry.getKey()), entry.getValue());
 				}

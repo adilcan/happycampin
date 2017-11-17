@@ -29,9 +29,9 @@
               </tr>
               </thead>
               <tbody>
-              <tr th:each="entry: ${eatData}">
-                <td><input type="text" th:value="${entry.key}" readonly="true"/></td>
-                <td><input type="number" th:placeholder="${eatData.get(entry.key)}" th:field="*{eatMap[__${entry.key}__]}"/></td>
+              <tr th:each="entry: ${foodData}" th:if="${entry.getKey().getFoodType() == T(in.happycamp.management.domain.FoodType).EAT}">
+                <td><input type="text" th:value="${entry.key.name}" readonly="true"/></td>
+                <td><input type="number" th:value="${foodData.get(entry.key)}" th:field="*{foodMap[__${entry.key.name}__]}"/></td>
               </tr>
               </tbody>
               <tfoot></tfoot>
@@ -48,9 +48,9 @@
               </tr>
               </thead>
               <tbody>
-              <tr th:each="entry: ${drinkData}">
-                <td><input type="text" name="value" th:value="${entry.key}" readonly="true"/></td>
-                <td><input type="number" th:placeholder="${drinkData.get(entry.key)}" th:field="*{drinkMap[__${entry.key}__]}"/></td>
+              <tr th:each="entry: ${foodData}" th:if="${entry.getKey().getFoodType() == T(in.happycamp.management.domain.FoodType).DRINK}">
+                <td><input type="text" th:value="${entry.key.name}" readonly="true"/></td>
+                <td><input type="number" th:value="${foodData.get(entry.key)}" th:field="*{foodMap[__${entry.key.name}__]}"/></td>
               </tr>
               </tbody>
               <tfoot></tfoot>
@@ -63,6 +63,20 @@
       </form>
     </div>
   </div>
+
+  <script th:inline="javascript">
+    $(document).ready(function(){
+        var foodNames = [[${foodNames}]];
+
+        Object.keys(foodNames).forEach(function(key) {
+          value = foodNames[key];
+          var elementId = 'foodMap' + key;
+          document.getElementById(elementId).value = value;
+
+        });
+
+    });
+  </script>
 
 </th:block>
 </html>
