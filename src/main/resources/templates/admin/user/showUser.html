@@ -1,34 +1,33 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
-
 <th:block layout:fragment="content">
-
-  <div class="four wide centered column">
-    <h2 th:text="#{user.detail}" class="ui horizontal header">User Detail</h2>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h4 class="text-center" th:text="#{user.detail}">User Detail</h4>
+        </div>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th th:text="#{user.username}">Username</th>
+              <th th:text="#{user.email}">E-Mail</th>
+              <th th:text="#{user.role}">Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td th:text="${user.username}"></td>
+              <td th:text="${user.email}"></td>
+              <td th:text="${user.role}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="ten wide centered column">
-    <a class="ui teal button" th:href="@{'/admin/users/' + *{id} + '/update'}">
-      <i class="add circle icon"></i>
-      <i th:text="#{common.update}"></i>
-    </a>
-  </div>
-
-  <table class="ui user table">
-    <tbody>
-    <tr>
-      <th th:text="#{user.username}">Username</th>
-      <th th:text="#{user.email}">E-Mail</th>
-      <th th:text="#{user.role}">Role</th>
-    </tr>
-    <tr>
-      <td th:text="${user.username}"></td>
-      <td th:text="${user.email}"></td>
-      <td th:text="${user.role}"></td>
-    </tr>
-    </tbody>
-  </table>
 
 </th:block>
-
 </html>

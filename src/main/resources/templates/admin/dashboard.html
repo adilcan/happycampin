@@ -1,21 +1,37 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
 >
 <th:block layout:fragment="content">
-  <div class="ui center aligned segment">
-    <h1 th:text="#{common.welcome}">Welcome</h1>
-    <div class="container">
+  <h1 class="text-center" th:text="#{common.welcome}">Welcome</h1>
 
-      <div class="ui two column centered grid">
-        <div class="column">
-          <h3 th:text="#{chart.room_distro}" class="ui center aligned blue header">Chart</h3>
-          <canvas id="roomTypeChart" width="600" height="600"></canvas>
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 th:text="#{chart.room_distro}" class="text-center">Chart</h3>
         </div>
-        <div class="column">
-          <h3 th:text="#{chart.customer_capacity}" class="ui center aligned blue header">Chart</h3>
-          <canvas id="roomSizeChart" width="400" height="400"></canvas>
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="roomTypeChart" width="400" height="400"></canvas>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="col-md-5">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 th:text="#{chart.customer_capacity}" class="text-center">Chart</h3>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="roomSizeChart" width="400" height="400"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
   </div>
   <script th:inline="javascript">
     var roomTypeData = [[${roomTypeData}]];
@@ -51,16 +67,6 @@
     },
     options: {}
     });
-
-
-
-
-
-
-
-
-
   </script>
-
 </th:block>
 </html>

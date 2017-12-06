@@ -1,117 +1,151 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
-
 <th:block layout:fragment="content">
-  <div class="four wide centered column">
-    <h2 th:text="#{customer.detail}" class="ui horizontal header">Customer Detail</h2>
-  </div>
-  <div class="ten wide centered column">
-    <a class="ui teal button" th:href="@{'/admin/customers/' + *{id} + '/update'}">
-      <i class="add circle icon"></i>
-      <i th:text="#{common.update}"></i>
-    </a>
-  </div>  <div class="container">
 
-    <table class="ui customer table">
-      <thead>
-      <tr>
-        <th th:text="#{customer.name}">Name</th>
-        <th th:text="#{customer.email}">E-Mail</th>
-        <th th:text="#{customer.phone}">Phone</th>
-        <th th:text="#{customer.status}">Status</th>
-        <th th:text="#{common.room}">Room</th>
-        <th th:text="#{customer.arrival_date}">Arrival Date</th>
-        <th th:text="#{customer.return_date}">Return Date</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td th:text="${customer.fullName}"></td>
-        <td th:text="${customer.emailAddress}"></td>
-        <td th:text="${customer.phoneNumber}"></td>
-        <td th:text="${customer.statusType}"></td>
-        <td><a th:href="@{'/admin/rooms/' + ${customer.room.id}}" th:text="${customer.room.code}"/></td>
-        <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
-        <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>
-      </tr>
-      </tbody>
-    </table>
-
-    <div class="ui two column centered grid">
-      <div class="column">
-        <div class="ui center aligned segment">
-          <label th:text="#{payment.paid}" for="paid">Paid Debt</label>
-          <h2 id="paid" th:text="${paymentInfo.get('paidDebt') + '₺'}"></h2>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h4 class="text-center" th:text="#{customer.detail}">Customer Detail</h4>
         </div>
-      </div>
-      <div class="column">
-        <div class="ui center aligned segment">
-          <label th:text="#{payment.remaining}" for="remaining">Remaining Debt</label>
-          <h2 id="remaining" th:text="${paymentInfo.get('remainingDebt') + '₺'}"></h2>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th th:text="#{customer.name}">Name</th>
+              <th th:text="#{customer.email}">E-Mail</th>
+              <th th:text="#{customer.phone}">Phone</th>
+              <th th:text="#{customer.status}">Status</th>
+              <th th:text="#{common.room}">Room</th>
+              <th th:text="#{customer.arrival_date}">Arrival Date</th>
+              <th th:text="#{customer.return_date}">Return Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td th:text="${customer.fullName}"></td>
+              <td th:text="${customer.emailAddress}"></td>
+              <td th:text="${customer.phoneNumber}"></td>
+              <td th:text="${customer.statusType}"></td>
+              <td><a th:href="@{'/admin/rooms/' + ${customer.room.id}}" th:text="${customer.room.code}"/></td>
+              <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
+              <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-
-    <h4 th:text="#{common.general_addition}" class="ui horizontal divider header">General Addition</h4>
-
-    <table class="ui generalAddition table">
-      <thead>
-      <tr>
-        <th th:text="#{common.food}">Food</th>
-        <th th:text="#{common.quantity}">Quantity</th>
-        <th th:text="#{common.price}">Price</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="pr: ${generalAddition}">
-        <td th:text="${pr.key.getName()}"/>
-        </td>
-        <td th:text="${pr.value}"/>
-        </td>
-        <td th:text="${pr.value * pr.key.getPrice()}"/>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h4 th:text="#{common.payments}" class="ui horizontal divider header">Payments</h4>
-
-    <table class="ui celled table">
-      <thead>
-      <tr>
-        <th th:text="#{common.date}">Date</th>
-        <th th:text="#{common.price}">Price</th>
-        <th th:text="#{payment.type}">Type</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="payment :${customer.payments}">
-        <td><a th:href="@{'/admin/payments/' + ${payment.id}}" th:text="${#dates.format(payment.date, 'dd-MM-yyyy')}"/></td>
-        <td th:text="${payment.price}"></td>
-        <td th:text="${payment.paymentType}"></td>
-      </tr>
-      </tbody>
-      <tfoot></tfoot>
-    </table>
-
-    <h4 th:text="#{common.additions}" class="ui horizontal divider header">Additions</h4>
-
-    <table class="ui customer table">
-      <thead>
-      <tr>
-        <th th:text="#{common.date}">Date</th>
-        <th th:text="#{common.price}">Price</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="addition :${customer.additions}">
-        <td><a th:href="@{'/admin/additions/' + ${addition.id}}" th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"/></td>
-        <td th:text="${addition.price}"></td>
-      </tr>
-      </tbody>
-    </table>
   </div>
-</th:block>
 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="box">
+          <h4 class="text-center" th:text="#{payment.paid}" for="paid">Paid Debt</h4>
+          <h2 class="text-center" id="paid" th:text="${paymentInfo.get('paidDebt') + '₺'}"></h2>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box">
+          <h4 class="text-center" th:text="#{payment.remaining}" for="remaining">Remaining Debt</h4>
+          <h2 class="text-center" id="remaining" th:text="${paymentInfo.get('remainingDebt') + '₺'}"></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+
+          <h4 th:text="#{common.general_addition}" class="text-center">General Addition</h4>
+        </div>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th th:text="#{common.food}">Food</th>
+              <th th:text="#{common.quantity}">Quantity</th>
+              <th th:text="#{common.price}">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pr: ${generalAddition}">
+              <td th:text="${pr.key.getName()}"/>
+              </td>
+              <td th:text="${pr.value}"/>
+              </td>
+              <td th:text="${pr.value * pr.key.getPrice()}"/>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+
+          <h4 th:text="#{common.payments}" class="text-center">Payments</h4>
+        </div>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th th:text="#{common.date}">Date</th>
+              <th th:text="#{common.price}">Price</th>
+              <th th:text="#{payment.type}">Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="payment :${customer.payments}">
+              <td><a th:href="@{'/admin/payments/' + ${payment.id}}" th:text="${#dates.format(payment.date, 'dd-MM-yyyy')}"/></td>
+              <td th:text="${payment.price}"></td>
+              <td th:text="${payment.paymentType}"></td>
+            </tr>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+
+          <h4 th:text="#{common.additions}" class="text-center">Additions</h4>
+        </div>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th th:text="#{common.date}">Date</th>
+              <th th:text="#{common.price}">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="addition :${customer.additions}">
+              <td><a th:href="@{'/admin/additions/' + ${addition.id}}" th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"/></td>
+              <td th:text="${addition.price}"></td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</th:block>
 </html>

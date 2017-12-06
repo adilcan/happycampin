@@ -1,66 +1,73 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout">
 <th:block layout:fragment="content">
-
   <div class="row">
-    <h1 th:text="#{addition.update}">Update an Addition</h1>
-    <div class="ui container">
-      <form class="ui addition form" method="post" th:action="@{@{'/admin/additions/' + ${addition.id} + '/update'}}" th:object="${additionDto}">
-
-        <div class="field">
-          <label th:text="#{common.customer}">Customer</label>
-          <select class="ui fluid dropdown" th:field="*{customer}">
-            <option th:text="#{common.customer}" value="">Customer</option>
-            <option th:each="customer :${customers}"
-                    th:value="${customer.id}"
-                    th:text="${customer.fullName}"></option>
-          </select>
+    <div class="col-xs-12">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h2 th:text="#{addition.update}" class="text-center">Update Addition</h2>
         </div>
+        <form method="post" th:action="@{@{'/admin/additions/' + ${addition.id} + '/update'}}" th:object="${additionDto}">
+          <div class="box-body">
+            <div class="form-group">
 
-        <div class="ui two column centered grid">
+              <select class="form-control" th:field="*{customer}">
+                <option th:text="#{common.customer}" value="">Customer</option>
+                <option th:each="customer :${customers}"
+                        th:value="${customer.id}"
+                        th:text="${customer.fullName}"></option>
+              </select>
+            </div>
 
-          <div class="column">
-            <h4 th:text="#{food.eats}" class="ui centered header">Eats</h4>
-            <table class="ui celled table">
-              <thead>
-              <tr>
-                <th th:text="#{common.name}">Name</th>
-                <th th:text="#{common.quantity}">Quantity</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr th:each="entry: ${foodData}" th:if="${entry.getKey().getFoodType() == T(in.happycamp.management.domain.FoodType).EAT}">
-                <td><input type="text" th:value="${entry.key.name}" readonly="true"/></td>
-                <td><input type="number" th:value="${foodData.get(entry.key)}" th:field="*{foodMap[__${entry.key.name}__]}"/></td>
-              </tr>
-              </tbody>
-              <tfoot></tfoot>
-            </table>
+            <div class="col-md-6">
+              <div class="form-group">
+                <h4 th:text="#{food.eats}" class="text-center">Eats</h4>
+                <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th th:text="#{common.name}">Name</th>
+                    <th th:text="#{common.quantity}">Quantity</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="entry: ${foodData}"
+                      th:if="${entry.getKey().getFoodType() == T(in.happycamp.management.domain.FoodType).EAT}">
+                    <td><input type="text" th:value="${entry.key.name}" readonly="true"/></td>
+                    <td><input type="number" th:field="*{foodMap[__${entry.key.name}__]}"/></td>
+                  </tr>
+                  </tbody>
+                  <tfoot></tfoot>
+                </table>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <h4 th:text="#{food.drinks}" class="text-center">Drinks</h4>
+                <table class="table table-hover">
+                  <thead>
+                  <tr>
+                    <th th:text="#{common.name}">Name</th>
+                    <th th:text="#{common.quantity}">Quantity</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="entry: ${foodData}"
+                      th:if="${entry.getKey().getFoodType() == T(in.happycamp.management.domain.FoodType).DRINK}">
+                    <td><input type="text" name="value" th:value="${entry.key.name}" readonly="true"/></td>
+                    <td><input type="number" name="value" th:field="*{foodMap[__${entry.key.name}__]}"/></td>
+                  </tr>
+                  </tbody>
+                  <tfoot></tfoot>
+                </table>
+              </div>
+            </div>
+
+            <button th:text="#{common.update}" class="btn btn-flat" type="submit">Update</button>
+
           </div>
+        </form>
+      </div>
 
-          <div class="column">
-            <h4 th:text="#{food.drinks}" class="ui centered header">Eats</h4>
-            <table class="ui celled table">
-              <thead>
-              <tr>
-                <th th:text="#{common.name}">Name</th>
-                <th th:text="#{common.quantity}">Quantity</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr th:each="entry: ${foodData}" th:if="${entry.getKey().getFoodType() == T(in.happycamp.management.domain.FoodType).DRINK}">
-                <td><input type="text" th:value="${entry.key.name}" readonly="true"/></td>
-                <td><input type="number" th:value="${foodData.get(entry.key)}" th:field="*{foodMap[__${entry.key.name}__]}"/></td>
-              </tr>
-              </tbody>
-              <tfoot></tfoot>
-            </table>
-          </div>
-
-        </div>
-
-        <button th:text="#{common.update}" class="ui button" type="submit">Update</button>
-      </form>
     </div>
   </div>
 
@@ -76,6 +83,7 @@
         });
 
     });
+
   </script>
 
 </th:block>

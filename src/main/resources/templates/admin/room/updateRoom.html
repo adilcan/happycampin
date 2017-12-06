@@ -1,42 +1,44 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout">
 <th:block layout:fragment="content">
   <div class="row">
-    <div class="ui secondary pointing fluid menu">
-      <h2 th:text="#{room.update}" class="ui header">Update Room</h2>
+    <div class="col-xs-12">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h2 th:text="#{room.update}" class="text-center">Update Room</h2>
+        </div>
+        <form method="post" th:action="@{'/admin/rooms/' + ${room.id} + '/update'}" th:object="${room}">
+          <div class="box-body">
+            <div class="form-group">
+              <label th:text="#{room.code}" for="code">Room Code</label>
+              <input class="form-control" type="text" id="code" th:value="*{code}" th:field="*{code}"/>
+            </div>
+
+            <div class="form-group">
+              <label th:text="#{room.capacity}" for="capacity">Room Capacity</label>
+              <input class="form-control" type="text" id="capacity" th:value="*{capacity}" th:field="*{capacity}"/>
+            </div>
+
+            <div class="form-group">
+              <label th:text="#{common.price}" for="price">Room Price</label>
+              <input class="form-control" type="text" id="price" th:value="*{common.price}" th:field="*{price}"/>
+            </div>
+
+            <div class="form-group">
+              <label th:text="#{common.type}">Room Type</label>
+              <select class="form-control" th:field="*{roomType}">
+                <option th:each="roomType : ${T(in.happycamp.management.domain.RoomType).values()}"
+                        th:value="${roomType}"
+                        th:text="${roomType}"></option>
+              </select>
+            </div>
+
+            <button th:text="#{common.update}" class="btn btn-flat" type="submit">Update</button>
+          </div>
+        </form>
+      </div>
+
     </div>
   </div>
-  <div class="row">
-    <div class="ui container">
-      <form class="ui room form" method="post" th:action="@{'/admin/rooms/' + ${room.id} + '/update'}" th:object="${room}">
 
-        <div class="field">
-          <label th:text="#{room.code}" for="code">Room Code</label>
-          <input type="text" id="code" th:placeholder="#{room.code}" th:value="*{code}" th:field="*{code}"/>
-        </div>
-
-        <div class="field">
-          <label th:text="#{room.capacity}" for="capacity">Room Capacity</label>
-          <input type="text" id="capacity" th:placeholder="#{room.capacity}" th:value="*{capacity}" th:field="*{capacity}"/>
-        </div>
-
-        <div class="field">
-          <label th:text="#{common.price}" for="price">Room Price</label>
-          <input type="text" id="price" th:placeholder="#{common.price}" th:value="*{price}" th:field="*{price}"/>
-        </div>
-
-        <div class="field">
-          <label th:text="#{common.type}">Room Type</label>
-          <select class="ui fluid dropdown" th:field="*{roomType}">
-            <option th:each="roomType : ${T(in.happycamp.management.domain.RoomType).values()}"
-                    th:value="${roomType}"
-                    th:text="${roomType}"></option>
-          </select>
-        </div>
-
-        <button th:text="#{common.update}" class="ui button" type="submit">Update</button>
-      </form>
-    </div>
-  </div>
 </th:block>
 </html>

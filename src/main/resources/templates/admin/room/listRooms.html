@@ -1,37 +1,44 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <th:block layout:fragment="content">
-
-  <div class="four wide column">
-    <h1 th:text="#{common.rooms}">Rooms</h1>
-  </div>
-  <div class="ten wide column">
-    <a class="ui teal button" th:href="@{/admin/rooms/new}">
-      <i class="add circle icon"></i>
-      <i th:text="#{room.new}"></i>
-    </a>
-  </div>
-
   <div class="row">
-    <table class="ui celled table">
-      <thead>
-      <tr>
-        <th th:text="#{common.code}">Code</th>
-        <th th:text="#{room.capacity}">Capacity</th>
-        <th th:text="#{common.price}">Price</th>
-        <th th:text="#{common.type}">Type</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="room :${rooms}">
-        <td><a th:href="@{'/admin/rooms/' + ${room.id}}" th:text="${room.code}"/></td>
-        <td th:text="${room.capacity}"></td>
-        <td th:text="${room.price}"></td>
-        <td th:text="${room.roomType}"></td>
-      </tr>
-      </tbody>
-      <tfoot></tfoot>
-    </table>
+    <div class="col-xs-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <div class="col-md-10">
+            <h1 class="text-center" th:text="#{common.rooms}">Rooms</h1>
+          </div>
+          <div class="col-md-2">
+            <a th:href="@{/admin/rooms/new}" class="btn btn-success">
+              <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+              <span th:text="#{room.new}"></span>
+            </a>
+          </div>
+        </div>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th th:text="#{common.code}">Code</th>
+              <th th:text="#{room.capacity}">Capacity</th>
+              <th th:text="#{common.price}">Price</th>
+              <th th:text="#{common.type}">Type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="room :${rooms}">
+              <td><a th:href="@{'/admin/rooms/' + ${room.id}}" th:text="${room.code}"/></td>
+              <td th:text="${room.capacity}"></td>
+              <td th:text="${room.price}"></td>
+              <td th:text="${room.roomType}"></td>
+            </tr>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 
 </th:block>

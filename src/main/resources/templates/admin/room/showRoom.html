@@ -1,56 +1,65 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
-
 <th:block layout:fragment="content">
-  <div class="four wide centered column">
-    <h2 th:text="#{room.detail}" class="ui horizontal header">Room Detail</h2>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h4 class="text-center" th:text="#{room.detail}">Room Detail</h4>
+        </div>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th th:text="#{room.code}">Code</th>
+              <th th:text="#{room.capacity}">Capacity</th>
+              <th th:text="#{common.price}">Price</th>
+              <th th:text="#{common.type}">roomType</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td th:text="${room.code}"></td>
+              <td th:text="${room.capacity}"></td>
+              <td th:text="${room.price}"></td>
+              <td th:text="${room.roomType}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h4 class="text-center" th:text="#{common.guests}">Guests</h4>
+        </div>
+
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th th:text="#{customer.name}">Name</th>
+              <th th:text="#{customer.arrival_date}">Arrival Date</th>
+              <th th:text="#{customer.return_date}">Return Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customer :${room.customers}">
+              <td><a th:href="@{'/admin/customers/' + ${customer.id}}" th:text="${customer.fullName}"/></td>
+              <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
+              <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>
+            </tr>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
+    </div>
+
+
   </div>
-  <div class="ten wide centered column">
-    <a class="ui teal button" th:href="@{'/admin/rooms/' + *{id} + '/update'}">
-      <i class="add circle icon"></i>
-      <i th:text="#{common.update}"></i>
-    </a>
-  </div>  <div class="container">
 
-    <table class="ui room table">
-      <thead>
-      <tr>
-        <th th:text="#{room.code}">Code</th>
-        <th th:text="#{room.capacity}">Capacity</th>
-        <th th:text="#{common.price}">Price</th>
-        <th th:text="#{common.type}">roomType</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td th:text="${room.code}"></td>
-        <td th:text="${room.capacity}"></td>
-        <td th:text="${room.price}"></td>
-        <td th:text="${room.roomType}"></td>
-      </tr>
-      </tbody>
-    </table>
-
-    <h4 th:text="#{common.guests}" class="ui horizontal divider header">Guests</h4>
-
-    <table class="ui customer table">
-      <thead>
-      <tr>
-        <th th:text="#{customer.name}">Name</th>
-        <th th:text="#{customer.arrival_date}">Arrival Date</th>
-        <th th:text="#{customer.return_date}">Return Date</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="customer :${room.customers}">
-        <td><a th:href="@{'/admin/customers/' + ${customer.id}}" th:text="${customer.fullName}"/></td>
-        <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
-        <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
 </th:block>
-
 </html>

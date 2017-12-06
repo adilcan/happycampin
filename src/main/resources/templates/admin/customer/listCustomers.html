@@ -1,39 +1,38 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <th:block layout:fragment="content">
-
-
-    <div class="four wide centered column">
-      <h1 class="ui center aligned header" th:text="#{common.customers}">Customers</h1>
-    </div>
-    <div class="ten wide centered column">
-      <a class="ui center aligned teal button" th:href="@{/admin/customers/new}">
-        <i class="add circle icon"></i>
-        <i th:text="#{customer.new}"></i>
-      </a>
-    </div>
-
     <div class="row">
-      <table class="ui celled table">
-        <thead>
-        <tr>
-          <th th:text="#{common.name}">Name</th>
-          <th th:text="#{common.room}">Room</th>
-          <th th:text="#{customer.arrival_date}">Arrival Date</th>
-          <th th:text="#{customer.return_date}">Return Date</th>
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h1 class="text-center" th:text="#{common.customers}">Customers</h1>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="customer :${customers}">
-          <td><a th:href="@{'/admin/customers/' + ${customer.id}}" th:text="${customer.fullName}"/></td>
-          <td th:text="${customer.room.code}"></td>
-          <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
-          <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>
-        </tr>
-        </tbody>
-        <tfoot></tfoot>
-      </table>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th th:text="#{common.name}">Name</th>
+                            <th th:text="#{common.room}">Room</th>
+                            <th th:text="#{customer.arrival_date}">Arrival Date</th>
+                            <th th:text="#{customer.return_date}">Return Date</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="customer :${customers}">
+                            <td><a th:href="@{'/admin/customers/' + ${customer.id}}" th:text="${customer.fullName}"/></td>
+                            <td th:text="${customer.room.code}"></td>
+                            <td th:text="${#dates.format(customer.arrivalDate, 'dd-MM-yyyy')}"></td>
+                            <td th:text="${#dates.format(customer.returnDate, 'dd-MM-yyyy')}"></td>
+                        </tr>
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+
 </th:block>
 </html>

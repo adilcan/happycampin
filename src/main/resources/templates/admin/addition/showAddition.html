@@ -1,54 +1,62 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-
-
 <th:block layout:fragment="content">
-  <div class="four wide centered column">
-  <h2 th:text="#{addition.detail}" class="ui horizontal header">Addition Detail</h2>
-  </div>
-    <div class="ten wide centered column">
-      <a class="ui teal button" th:href="@{'/admin/additions/' + *{id} + '/update'}">
-        <i class="add circle icon"></i>
-        <i th:text="#{common.update}"></i>
-      </a>
-    </div>
-  <div>
-  <table class="ui customer table">
-    <thead>
-    <tr>
-      <th th:text="#{common.id}">ID</th>
-      <th th:text="#{common.customer}">Customer</th>
-      <th th:text="#{common.date}">Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td th:text="${addition.id}"></td>
-      <td><a th:href="@{'/admin/customers/' + ${addition.customer.id}}" th:text="${addition.customer.fullName}"/></td>
-      <td th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"></td>
-    </tr>
-    </tbody>
-  </table>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h4 class="text-center" th:text="#{addition.detail}">Additions</h4>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th th:text="#{common.id}">ID</th>
+                            <th th:text="#{common.customer}">Customer</th>
+                            <th th:text="#{common.date}">Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="${addition.id}"></td>
+                            <td><a th:href="@{'/admin/customers/' + ${addition.customer.id}}" th:text="${addition.customer.fullName}"/></td>
+                            <td th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
-  <h4 th:text="#{common.purchased}" class="ui horizontal divider header">Purchased</h4>
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
 
-  <table class="ui customer table">
-    <thead>
-    <tr>
-      <th th:text="#{common.name}">Name</th>
-      <th th:text="#{common.quantity}">Price</th>
-      <th th:text="#{common.price}">Price</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="pr: ${addition.foods}">
-      <td th:text="${pr.key.getName()}"/></td>
-      <td th:text="${pr.value}"/></td>
-      <td th:text="${pr.key.getPrice() * pr.value}"/></td>
-    </tr>
-    </tbody>
-  </table>
+                    <h4 th:text="#{common.purchased}" class="text-center">Purchased</h4>
+
+                </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th th:text="#{common.name}">Name</th>
+                            <th th:text="#{common.quantity}">Price</th>
+                            <th th:text="#{common.price}">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="pr: ${addition.foods}">
+                            <td th:text="${pr.key.getName()}"/>
+                            </td>
+                            <td th:text="${pr.value}"/>
+                            </td>
+                            <td th:text="${pr.key.getPrice() * pr.value}"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 
 </th:block>
-
 </html>

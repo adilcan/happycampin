@@ -2,90 +2,130 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-  <script th:src="@{/js/jquery.min.js}"></script>
-  <script th:src="@{/js/semantic.js}"></script>
-  <script th:src="@{/js/Chart.min.js}"></script>
-  <script th:src="@{/js/vis.min.js}"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link rel="stylesheet" type="text/css" th:href="@{/css/admin.css}"/>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/semantic.min.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/font-awesome.min.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/AdminLTE.min.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/skin-purple.min.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/css/sweetalert.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/css/vis.min.css}"/>
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <script th:src="@{/js/jquery.min.js}"></script>
+  <script th:src="@{/js/bootstrap.min.js}"></script>
+  <script th:src="@{/js/jquery.slimscroll.min.js}"></script>
+  <script th:src="@{/js/fastclick.js}"></script>
+  <script th:src="@{/js/adminlte.min.js}"></script>
+  <script th:src="@{/js/Chart.min.js}"></script>
+  <script th:src="@{/js/vis.min.js}"></script>
+
 </head>
+<body class="hold-transition skin-purple fixed sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
 
-<body data-page="dashboard">
+  <header class="main-header">
+    <a th:href="@{/}" class="logo">
+      <span class="logo-mini"><i class="glyphicon glyphicon-tent"></i></span>
+      <span class="logo-lg"><i class="glyphicon glyphicon-tent"></i><b>Happy</b>Camping</span>
+    </a>
 
-<div class="ui grid container">
+    <nav class="navbar navbar-static-top">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+      </a>
 
-  <div class="pusher">
-    <div class="ui grid container">
-      <!-- Non-responsive main left menu -->
-      <div class="ui left fixed vertical inverted menu">
-        <a class="item" th:href="@{/}">
-          <div class="icon">
-            <i class="home large icon"></i>
-          </div>
-        </a>
-        <a class="item" th:href="@{/admin/rooms}">
-          <i class="hotel large icon"></i>
-          <p th:text="#{common.rooms}"></p>
-        </a>
-        <a class="item" th:href="@{/admin/customers}">
-          <i class="user large icon"></i>
-          <p th:text="#{common.customers}"></p>
-        </a>
-        <a class="item" th:href="@{/admin/additions}">
-          <i class="browser large icon"></i>
-          <p th:text="#{common.additions}"></p>
-        </a>
-        <a class="item" th:href="@{/admin/foods}">
-          <i class="food large icon"></i>
-          <p th:text="#{common.foods}"></p>
-        </a>
-        <a class="item" th:href="@{/admin/payments}">
-          <i class="payment large icon"></i>
-          <p th:text="#{common.payments}"></p>
-        </a>
-        <a class="item" th:href="@{/timeline}">
-          <i class="calendar large icon"></i>
-          <p th:text="#{common.timeline}"></p>
-        </a>
-        <a class="item" th:href="@{/admin/users}">
-          <i class="users large icon"></i>
-          <p th:text="#{common.users}"></p>
-        </a>
-        <div class="ui dropdown item">
+    </nav>
+  </header>
+
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <ul class="sidebar-menu" data-widget="tree">
+        <li>
+          <a th:href="@{/}">
+            <i class="fa fa-home"></i>
+            <span th:text="#{common.dashboard}"></span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/admin/rooms}">
+            <i class="fa fa-bed"></i>
+            <span th:text="#{common.rooms}"></span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/admin/customers}">
+            <i class="fa fa-user"></i>
+            <span th:text="#{common.customers}"></span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/admin/additions}">
+            <i class="fa fa-list"></i>
+            <span th:text="#{common.additions}"></span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/admin/foods}">
+            <i class="fa fa-glass"></i>
+            <span th:text="#{common.foods}"></span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/admin/payments}">
+            <i class="fa fa-turkish-lira"></i>
+            <span th:text="#{common.payments}"></span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/timeline}">
+            <i class="fa fa-calendar"></i>
+            <span th:text="#{common.timeline}"></span>
+          </a>
+        </li>
+        <li>
+          <a class="item" th:href="@{/admin/users}">
+            <i class="fa fa-users"></i>
+            <span th:text="#{common.users}"></span>
+          </a>
+        </li>
+        <li class="treeview">
           <a th:text="#{common.language}"></a>
-          <p class="dropdown icon"></p>
-          <div class="menu">
-            <a id="en" class="item" href="#">English</a>
-            <a id="tr" class="item" href="#">Türkçe</a>
-          </div>
-        </div>
-      </div>
+          <ul class="treeview-menu">
+            <li>
+              <a id="en" class="item" href="#">English</a>
+            </li>
+            <li>
+              <a id="tr" class="item" href="#">Türkçe</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
 
+  </aside>
 
-      <div class="ui main grid">
-        <!-- Responsive top menu -->
-        <div class="ui fixed inverted main menu">
-          <div class="ui container">
-            <a class="launch icon item sidebar-toggle">
-              <i class="sidebar icon"></i>
-            </a>
-          </div>
-        </div>
-        <th:block layout:fragment="content"/>
-      </div>
-    </div>
+  <div class="content-wrapper">
+    <section class="content">
+      <th:block layout:fragment="content"/>
+    </section>
   </div>
+
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 0.5.0
+    </div>
+    <strong>🄯 2017 <a href="https://gitlab.com/adilcan">adilcan</a>.</strong>
+    HappyCamping is a <a href="https://fsf.org">Free Software</a>
+  </footer>
+
 </div>
 
 <script>
 $(document).ready(function() {
-    $('.ui.dropdown').dropdown();
     var url = window.location.href;
     var newUrl;
     $('#en').click(function(){
@@ -115,7 +155,9 @@ $(document).ready(function() {
       }
       });
 });
+
 </script>
+
 
 </body>
 </html>

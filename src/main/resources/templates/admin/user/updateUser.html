@@ -1,42 +1,45 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout">
 <th:block layout:fragment="content">
   <div class="row">
-    <div class="ui secondary pointing fluid menu">
-      <h2 th:text="#{user.update}" class="ui header">Update User</h2>
+    <div class="col-xs-12">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h2 th:text="#{user.update}" class="text-center">Update User</h2>
+        </div>
+        <form method="post" th:action="@{'/admin/users/' + ${user.id} + '/update'}" th:object="${user}">
+          <div class="box-body">
+
+            <div class="form-group">
+              <label th:text="#{user.username}" for="username">Username</label>
+              <input class="form-control" type="text" id="username" th:value="*{username}" th:field="*{username}"/>
+            </div>
+
+            <div class="form-group">
+              <label th:text="#{user.password}" for="password">Password</label>
+              <input class="form-control" type="password" id="password" th:value="*{password}" th:field="*{password}"/>
+            </div>
+
+            <div class="form-group">
+              <label th:text="#{user.email}" for="email">E-mail</label>
+              <input class="form-control" type="text" id="email" th:value="*{email}" th:field="*{email}"/>
+            </div>
+
+            <div class="form-group">
+              <label th:text="#{user.role}">User Role</label>
+              <select class="form-control" th:field="*{role}">
+                <option th:each="role : ${T(in.happycamp.management.domain.Role).values()}"
+                        th:value="${role}"
+                        th:text="${role}"></option>
+              </select>
+            </div>
+
+            <button th:text="#{common.update}" class="btn btn-flat" type="submit">Update</button>
+          </div>
+
+      </div>
+
     </div>
   </div>
-  <div class="row">
-    <div class="ui container">
-      <form class="ui user form" method="post" th:action="@{'/admin/users/' + ${user.id} + '/update'}" th:object="${user}">
 
-        <div class="field">
-          <label th:text="#{user.username}" for="username">Username</label>
-          <input type="text" id="username" th:value="*{username}" th:field="*{username}"/>
-        </div>
-
-        <div class="field">
-          <label th:text="#{user.password}" for="password">Password</label>
-          <input type="password" id="password" th:value="*{password}" th:field="*{password}"/>
-        </div>
-
-        <div class="field">
-          <label th:text="#{user.email}" for="email">E-Mail</label>
-          <input type="text" id="email" th:value="*{email}" th:field="*{email}"/>
-        </div>
-
-        <div class="field">
-          <label th:text="#{user.role}">User Role</label>
-          <select class="ui fluid dropdown" th:field="*{role}">
-            <option th:each="role : ${T(in.happycamp.management.domain.Role).values()}"
-                    th:value="${role}"
-                    th:text="${role}"></option>
-          </select>
-        </div>
-
-        <button th:text="#{common.update}" class="ui button" type="submit">Update</button>
-      </form>
-    </div>
-  </div>
 </th:block>
 </html>
