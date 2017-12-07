@@ -1,62 +1,62 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <th:block layout:fragment="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box box-primary">
-                <div class="box-header">
-                    <h4 class="text-center" th:text="#{addition.detail}">Additions</h4>
-                </div>
-                <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th th:text="#{common.id}">ID</th>
-                            <th th:text="#{common.customer}">Customer</th>
-                            <th th:text="#{common.date}">Date</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td th:text="${addition.id}"></td>
-                            <td><a th:href="@{'/admin/customers/' + ${addition.customer.id}}" th:text="${addition.customer.fullName}"/></td>
-                            <td th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h4 class="text-center" th:text="#{addition.detail}">Additions</h4>
         </div>
-
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-
-                    <h4 th:text="#{common.purchased}" class="text-center">Purchased</h4>
-
-                </div>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th th:text="#{common.name}">Name</th>
-                            <th th:text="#{common.quantity}">Price</th>
-                            <th th:text="#{common.price}">Price</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="pr: ${addition.foods}">
-                            <td th:text="${pr.key.getName()}"/>
-                            </td>
-                            <td th:text="${pr.value}"/>
-                            </td>
-                            <td th:text="${pr.key.getPrice() * pr.value}"/>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th th:text="#{common.id}">ID</th>
+              <th th:text="#{common.customer}">Customer</th>
+              <th th:text="#{common.date}">Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td th:text="${addition.id}"></td>
+              <td><a th:href="@{'/admin/customers/' + ${addition.customer.id}}" th:text="${addition.customer.fullName}"/></td>
+              <td th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"></td>
+            </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+
+          <h4 th:text="#{common.purchased}" class="text-center">Purchased</h4>
+
+        </div>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th th:text="#{common.name}">Name</th>
+            <th th:text="#{common.quantity}">Price</th>
+            <th th:text="#{common.price}">Price</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="pr: ${addition.foods}">
+            <td th:text="${pr.key.getName()}"/>
+            </td>
+            <td th:text="${pr.value}"/>
+            </td>
+            <td th:text="${pr.key.getPrice() * pr.value}"/>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
 </th:block>
 </html>

@@ -1,35 +1,35 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorator="admin/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <th:block layout:fragment="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box box-primary">
-                <div class="box-header">
-                    <h1 class="text-center" th:text="#{common.additions}">Additions</h1>
-                </div>
-                <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th th:text="#{common.date}">Date</th>
-                            <th th:text="#{common.customer}">Customer</th>
-                            <th th:text="#{common.price}">Price</th>
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="addition :${additions}">
-                            <td><a th:href="@{'/admin/additions/' + ${addition.id}}" th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"/></td>
-                            <td th:text="${addition.customer.fullName}"></td>
-                            <td th:text="${addition.price}"></td>
-                        </tr>
-                        </tbody>
-                        <tfoot></tfoot>
-                    </table>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h1 class="text-center" th:text="#{common.additions}">Additions</h1>
         </div>
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th th:text="#{common.date}">Date</th>
+              <th th:text="#{common.customer}">Customer</th>
+              <th th:text="#{common.price}">Price</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="addition :${additions}">
+              <td><a th:href="@{'/admin/additions/' + ${addition.id}}" th:text="${#dates.format(addition.date, 'dd-MM-yyyy')}"/></td>
+              <td th:text="${addition.customer.fullName}"></td>
+              <td th:text="${addition.price}"></td>
+            </tr>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
     </div>
+  </div>
 
 </th:block>
 </html>

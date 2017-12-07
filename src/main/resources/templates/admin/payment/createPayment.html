@@ -8,28 +8,28 @@
         </div>
         <form method="post" th:action="@{/admin/payments/new}" th:object="${payment}">
           <div class="box-body">
-          <div class="form-group">
-            <label th:text="#{common.customer}">Customer</label>
-            <select class="form-control" th:field="*{customer}">
-              <option th:text="#{common.customer}" value="">Customer</option>
-              <option th:each="customer :${customers}"
-                      th:value="${customer.id}"
-                      th:text="${customer.fullName}"></option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label th:text="#{common.customer}">Customer</label>
+              <select class="form-control" th:field="*{customer}">
+                <option th:text="#{common.customer}" value="">Customer</option>
+                <option th:each="customer :${customers}"
+                        th:value="${customer.id}"
+                        th:text="${customer.fullName}"></option>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <label th:text="#{payment.type}">Payment Type</label>
-            <select class="form-control" th:field="*{paymentType}">
-              <option th:each="paymentType : ${T(in.happycamp.management.domain.PaymentType).values()}"
-                      th:value="${paymentType}"
-                      th:text="${paymentType}"></option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label th:text="#{payment.type}">Payment Type</label>
+              <select class="form-control" th:field="*{paymentType}">
+                <option th:each="paymentType : ${T(in.happycamp.management.domain.PaymentType).values()}"
+                        th:value="${paymentType}"
+                        th:text="${paymentType}"></option>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <input class="form-control" type="text" th:placeholder="#{common.price}" th:field="*{price}" id="price">
-          </div>
+            <div class="form-group">
+              <input class="form-control" type="text" th:placeholder="#{common.price}" th:field="*{price}" id="price">
+            </div>
 
             <button th:text="#{common.create}" class="btn btn-flat" type="submit">Create</button>
           </div>
