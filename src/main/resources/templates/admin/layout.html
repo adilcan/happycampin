@@ -12,6 +12,7 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/skin-purple.min.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/css/sweetalert.css}">
   <link rel="stylesheet" type="text/css" th:href="@{/css/vis.min.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
@@ -87,13 +88,16 @@
           </a>
         </li>
         <li>
-          <a class="item" th:href="@{/admin/users}">
+          <a th:href="@{/admin/users}">
             <i class="fa fa-users"></i>
             <span th:text="#{common.users}"></span>
           </a>
         </li>
         <li class="treeview">
-          <a th:text="#{common.language}"></a>
+          <a href="#">
+            <i class="fa fa-language"></i>
+            <span th:text="#{common.language}"></span>
+          </a>
           <ul class="treeview-menu">
             <li>
               <a id="en" class="item" href="#">English</a>
@@ -116,7 +120,7 @@
 
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 0.5.0
+      <b>Version</b> 0.0.1
     </div>
     <strong>🄯 2017 <a href="https://gitlab.com/adilcan">adilcan</a>.</strong>
     HappyCamping is a <a href="https://fsf.org">Free Software</a>
