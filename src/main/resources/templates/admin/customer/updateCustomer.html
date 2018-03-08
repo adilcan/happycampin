@@ -6,7 +6,7 @@
         <div class="box-header with-border">
           <h2 th:text="#{customer.update}" class="text-center">Update Customer</h2>
         </div>
-        <form method="post" th:action="@{/admin/customers/new}" th:object="${customer}">
+        <form method="post" th:action="@{'/admin/customers/' + ${customer.id} + '/update'}" th:object="${customer}">
           <div class="box-body">
             <div class="form-group">
               <label th:text="#{customer.name}" for="name">Full Name</label>
