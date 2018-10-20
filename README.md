@@ -1,3 +1,3 @@
 # happycampin
-A small-scale hotel or camping area management application
-Still in development
+A small-scale hotel or camping area management application,
+still in development
